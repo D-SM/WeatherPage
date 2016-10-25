@@ -1,0 +1,22 @@
+{
+  "name": "PHPJSPOZ1",
+  "description": "Project summarizing SDA course",
+  "authors": [
+    {
+      "name": "Mateusz Strozyk",
+      "email": "mateusz.strozyk@webtailor.pl"
+    }
+  ],
+  "require": {
+    "silex/silex": "~1.3",
+    "symfony/twig-bridge": "~2.3",
+    "phpmailer/phpmailer": "~5.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "User\\": "src/User/",
+      "WeatherAPI\\": "src/WeatherAPI/",
+      "App\\": "src/App/"
+    }
+  }
+}
