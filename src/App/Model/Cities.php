@@ -22,10 +22,14 @@ class Cities extends AbstractModel {
         $result = $this->conn->query('SELECT count(*) as count FROM weather WHERE user_id = ' . $id
                                 . ' AND city_name = ' . $city);
         $count = $result->fetch_assoc();
-        
+        $isCity = true;
         if ($count['count'] === 1) {
-            consol.log ('miasto jest w bazie');
+            // return zmiennej, która zaiwera wartość np true albo false
+            // później na podstawie tej zmiennej w twig wyświetlamy, albo nie
+            // komunikat ze miasto jest juz dodane
+            return $isCity = true;
         } else {
+            return $isCity = false;
             
         } $this->conn->query('INSERT INTO weather VALUE (' . $id . ',"' . $city .'")');
                   
