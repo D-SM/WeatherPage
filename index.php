@@ -11,6 +11,8 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
         'twig.path' => __DIR__ . '/view',
 ]);
 
+$app['twig']->addGlobal('webPath', WEB_PATH);
+
 $app->get('/', function() use ($app) {
     return 'PHPJSPOZ1 Project';
 });
