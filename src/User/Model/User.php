@@ -10,5 +10,13 @@ namespace User\Model;
 
 class User
 {
-
+    public function __construct() {
+        
+    }
+    
+    public function registerUser($email,$password){
+        
+        $this->conn->query('INSERT INTO user WHERE u_mail = ' . $email . ' , u_pass = ' . $password);   
+        
+    }
 }
