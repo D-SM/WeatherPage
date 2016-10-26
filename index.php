@@ -16,5 +16,14 @@ $app['twig']->addGlobal('webPath', WEB_PATH);
 $app->get('/', function() use ($app) {
     return 'PHPJSPOZ1 Project';
 });
+$app->get('/test', function() use ($app) {
+  
+    
+    $myApi = new WeatherAPI\Model\Current();
+  
+    return var_dump($myApi->getWeather('Poznan'));
+});
+
+
 
 $app->run();
