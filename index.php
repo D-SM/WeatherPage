@@ -52,7 +52,8 @@ $app->post('/form-log', function () use ($app) {
 });
 
 $app->post('/form-reg', function () use ($app) {   
-  
+    $reg = new User\UserController();
+    $reg->renderRegisterPage();
     return $app['twig']->render('form-reg.twig', [
    
     ]);
