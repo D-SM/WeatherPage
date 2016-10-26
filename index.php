@@ -7,6 +7,9 @@ require_once  __DIR__ . '/const.php';
 
 $app = new \Silex\Application();
 
+use App\MainController;
+use App\SearchController;
+
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
         'twig.path' => __DIR__ . '/view',
 ]);
@@ -14,7 +17,18 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
 $app['twig']->addGlobal('webPath', WEB_PATH);
 
 $app->get('/', function() use ($app) {
-    return 'PHPJSPOZ1 Project';
+    $controller = new MainController($app['twig']);
+    return $controller->renderPage();
+});
+
+$app->get('/search', function() use ($app) {
+    $controller = new SearchController($app['twig']);
+    return $controller->renderPage();
+});
+
+$app->get('/profile', function() use ($app) {
+    $controller = new SearchController($app['twig']);
+    return $controller->renderPage();
 });
 
 $app->run();
