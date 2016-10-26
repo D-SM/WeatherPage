@@ -1,6 +1,6 @@
 <?php
 
-namespace MVC\Model;
+namespace User\Model;
 abstract class AbstractModel {
     
     protected $conn;
