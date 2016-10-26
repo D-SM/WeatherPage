@@ -62,7 +62,6 @@ $app->post('/form-reg', function () use ($app) {
     ]);
 });
 
-<<<<<<< HEAD
 $app->get('/', function() use ($app) {
     $controller = new MainController($app['twig']);
     return $controller->renderPage();
@@ -76,21 +75,15 @@ $app->get('/search', function() use ($app) {
 $app->get('/profile', function() use ($app) {
     $controller = new SearchController($app['twig']);
     return $controller->renderPage();
-=======
+});
+
 $app->post('/change-pass', function () use ($app) {   
-    return $app['twig']->render('change-pass.twig', [
-       
+    return $app['twig']->render('change-pass.twig', [       
     ]);
->>>>>>> ca676789acdf696973a67e74706046c25f8dabbf
 });
 
-$app->post('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {   
-         
+$app->post('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {            
         return $app->redirect('user-panel');
-    
 });
-
-
-
 
 $app->run();
