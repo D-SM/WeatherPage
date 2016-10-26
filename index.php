@@ -14,6 +14,8 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
         'twig.path' => __DIR__ . '/view',
 ]);
 
+$app['twig']->addGlobal('webPath', WEB_PATH);
+
 /* WIDOK REJESTRACJI */
 $app->get('/form-reg', function () use ($app) {   
     return $app['twig']->render('form-reg.twig');
