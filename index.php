@@ -14,6 +14,8 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
         'twig.path' => __DIR__ . '/view',
 ]);
 
+$app['twig']->addGlobal('webPath', WEB_PATH);
+
 /* WIDOK REJESTRACJI */
 $app->get('/form-reg', function () use ($app) {   
     return $app['twig']->render('form-reg.twig');
@@ -62,7 +64,10 @@ $app->post('/form-reg', function () use ($app) {
     ]);
 });
 
+<<<<<<< HEAD
 /* STRONA GLOWNA*/
+=======
+>>>>>>> 53016276088af5f43a6222bfb76f8d23ef9146ca
 $app->get('/', function() use ($app) {
     $controller = new MainController($app['twig']);
     return $controller->renderPage();
@@ -78,20 +83,24 @@ $app->get('/search', function() use ($app) {
 $app->get('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
     return $controller->renderPage();
+<<<<<<< HEAD
+=======
+});
+>>>>>>> 53016276088af5f43a6222bfb76f8d23ef9146ca
 
 $app->post('/change-pass', function () use ($app) {   
-    return $app['twig']->render('change-pass.twig', [
-       
+    return $app['twig']->render('change-pass.twig', [       
     ]);
 });
 
-$app->post('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {   
-         
+$app->post('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {            
         return $app->redirect('user-panel');
-    
 });
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 53016276088af5f43a6222bfb76f8d23ef9146ca
 $app->run();
