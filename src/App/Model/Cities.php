@@ -18,6 +18,16 @@ class Cities extends AbstractModel {
     }
     
     public function addCity ($id, $city) {
-        $this->conn->query('INSERT INTO weather VALUE (' . $id . ',"' . $city .'")');
+        
+        $result = $this->conn->query('SELECT count(*) as count FROM weather WHERE user_id = ' . $id
+                                . ' AND city_name = ' . $city);
+        $count = $result->fetch_assoc();
+        
+        if ($count['count'] === 1) {
+            consol.log ('miasto jest w bazie');
+        } else {
+            
+        } $this->conn->query('INSERT INTO weather VALUE (' . $id . ',"' . $city .'")');
+                  
     }
 }
