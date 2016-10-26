@@ -1,9 +1,10 @@
 <?php
+
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-require_once  __DIR__ . '/vendor/autoload.php';
-require_once  __DIR__ . '/const.php';
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/const.php';
 
 $app = new \Silex\Application();
 
@@ -11,7 +12,7 @@ use App\MainController;
 use App\SearchController;
 
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
-        'twig.path' => __DIR__ . '/view',
+    'twig.path' => __DIR__ . '/view',
 ]);
 
 $app['twig']->addGlobal('webPath', WEB_PATH);
@@ -69,13 +70,15 @@ $app->get('/', function() use ($app) {
     return $controller->renderPage();
 });
 
+/* STRONA WYNIkU WYSZUKIWANIA */
 $app->get('/search', function() use ($app) {
     $controller = new SearchController($app['twig']);
     return $controller->renderPage();
 });
 
+/* STRONA PROFILU */
 $app->get('/profile', function() use ($app) {
-    $controller = new SearchController($app['twig']);
+    $controller = new ProfileController($app['twig']);
     return $controller->renderPage();
 });
 
@@ -86,6 +89,13 @@ $app->post('/change-pass', function () use ($app) {
 
 $app->post('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {            
         return $app->redirect('user-panel');
+
+$app->get('apitest/', function() use ($app) {
+
+    $apiModel = new \WeatherAPI\Model\Current();
+    echo '<pre>';
+    return var_dump($apiModel->getWeather('Poznan'));
+//    return var_dump($apiModel->getForecast('Poznan'));
 });
 
 $app->run();
