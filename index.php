@@ -34,12 +34,12 @@ $app->get('/user-panel', function () use ($app) {
 });
 
 $app->get('/forgot-pass', function () use ($app) {   
-    return $app['twig']->render('reset-pass.twig');
+    return $app['twig']->render('forgot-pass.twig');
 });
 
 $app->get('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {   
   
-        return $app['twig']->render('reset-pass-confirm.twig', [      
+        return $app['twig']->render('forgot-pass-confirm.twig', [      
         ]);
     
 });
