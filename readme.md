@@ -8,13 +8,13 @@ Jacek,
 Bartek,
 Przemek
 
-TEAM2(User)
+TEAM2 (User)
 Łukasz,
 Mateusz,
 Dymitr,
 Tomek
 
-TEAM3(API)
+TEAM3 (API)
 Tomek,
 Danuta,
 Piotr,
