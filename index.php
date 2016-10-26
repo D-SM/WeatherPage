@@ -17,4 +17,10 @@ $app->get('/', function() use ($app) {
     return 'PHPJSPOZ1 Project';
 });
 
+$app->get('test/', function() use ($app) {
+    $apiModel = new \WeatherAPI\Model\Current();
+    echo '<pre>';
+    return var_dump($apiModel->getWeather('Poznan'));
+});
+
 $app->run();
