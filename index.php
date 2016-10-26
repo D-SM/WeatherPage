@@ -65,10 +65,6 @@ $app->post('/form-reg', function () use ($app) {
     ]);
 });
 
-<<<<<<< HEAD
-/* STRONA GLOWNA*/
-=======
->>>>>>> 53016276088af5f43a6222bfb76f8d23ef9146ca
 $app->get('/', function() use ($app) {
     $controller = new MainController($app['twig']);
     return $controller->renderPage();
@@ -84,10 +80,7 @@ $app->get('/search', function() use ($app) {
 $app->get('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
     return $controller->renderPage();
-<<<<<<< HEAD
-=======
 });
->>>>>>> 53016276088af5f43a6222bfb76f8d23ef9146ca
 
 $app->post('/change-pass', function () use ($app) {   
     return $app['twig']->render('change-pass.twig', [       
@@ -105,10 +98,4 @@ $app->get('apitest/', function() use ($app) {
 //    return var_dump($apiModel->getForecast('Poznan'));
 });
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 53016276088af5f43a6222bfb76f8d23ef9146ca
 $app->run();
