@@ -13,8 +13,8 @@
  */
 class WeatherCityData {
     private $array;
+
     public function __construct($data) {
         $this->array = $data;
-    }
     }
 }
