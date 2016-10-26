@@ -1,0 +1,48 @@
+{% extends "base.twig" %}
+{% block body %}
+<h1>MAIN PAGE</h1>
+<form action="forecast.php">
+    <input type="text" name="city"/>
+    <input type="submit" value="szukaj" class=""/>
+</form>
+<?php foreach ($cities as $city) { 
+if (!in_array($city, $citiesToHide)) {
+?>
+
+<div class='section' id='<?php echo $city; ?>'>
+    <?php
+    $api = new Api($city, 'weather');
+    $data = $api->getCurrentWeather();
+    ?>
+    <style>
+        #<?php echo $city; ?> {
+            background-image: url(<?php 
+                if (file_exists($data["description"] . ".png")) {
+                echo $data["description"] . ".png";
+            } else {
+                echo 'devil.png';
+            }
+            ?>);
+        }
+    </style>
+    <a href="index.php?city=<?php echo $city; ?>" class='close'>X</a>
+    <p><span class='cityName'><?php echo $data["name"]; ?></span><br/>
+        Temperatura: <?php echo $data["temp"]; ?><br/>
+        Ciśnienie: <?php echo $data["pressure"]; ?><br/>
+        Wilgotność: <?php echo $data["humidity"]; ?><br/>
+        Opis: <?php echo $data["description"]; ?></p>
+    <a href="forecast.php?city=<?php echo $data["name"]; ?>" >
+       <div class='btn-forecast'>Prognoza pogody</div></a>
+</div>
+<?php } else{ ?>
+<br/>
+<div class='section'>
+    <span class='cityName'><?php echo $data["name"]; ?></span><br/>
+    <a class='btn-forecast' href="index.php?unhide=<?php echo $city; ?>">Cofnij</a>
+</div>
+<?php
+
+}          
+} 
+?>
+{% endblock %}
