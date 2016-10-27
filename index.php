@@ -94,8 +94,9 @@ $app->post('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use (
 
 $app->get('/apitest', function() use ($app) {
     $apiModel = new \WeatherAPI\Model\Current();
-    echo '<pre>';
-    return var_dump($apiModel->getWeather('Poznan'));
+//    echo '<pre>';
+//    var_dump($apiModel->getWeather('Poznan'));
+    return $app->json($apiModel->getWeather('Poznan'));
 //    return var_dump($apiModel->getForecast('Poznan'));
 });
 
