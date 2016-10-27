@@ -6,6 +6,7 @@ ini_set("display_errors", 1);
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/const.php';
 
+$Session = new User\Model\Session();
 $app = new \Silex\Application();
 
 use App\MainController;
@@ -29,7 +30,9 @@ $app->get('/register', function () use ($app) {
 //diabelek: kiepska nazwa rutingu = dlaczego nie login?
 $app->get('/login', function () use ($app) {
     //diabelek: brak controlera
-    return $app['twig']->render('form-log.twig');
+    return $app['twig']->render('form-log.twig', [
+                'path' => WEB_PATH
+    ]);
 });
 
 /* WIDOK ZMIANY HASŁA */
@@ -39,9 +42,11 @@ $app->get('/change-pass', function () use ($app) {
 });
 
 /* WIDOK PANELU UŻYTKOWNIKA */
-$app->get('/user-panel', function () use ($app) {
+$app->get('/user-panel', function () use ($app ) {
     //diabelek: brak controlera
-    return $app['twig']->render('user-panel.twig',[]);
+    return $app['twig']->render('user-panel.twig', [
+        'email' => User\Model\Session::getName()
+    ]);
 });
 
 $app->get('/reset-pass', function () use ($app) {
@@ -54,20 +59,27 @@ $app->get('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($a
     return $app['twig']->render('forgot-pass-confirm.twig', []);
 });
 
-$app->post('/login', function () use ($app) {
+$app->post('/login', function () use ($app ) {
     //diabelek: brak controlera
-     $reg = new User\UserController();
-     $reg->renderLoginPage();
-    return $app['twig']->render('form-log.twig',[
-      'errors' => $reg->getInputErrors()  
-    ]);
+    $reg = new User\UserController();
+    $reg->renderLoginPage();
+    
+
+    if ($reg->renderLoginPage()) {
+
+        return $app->redirect('user-panel');
+    } else {
+        return $app['twig']->render('form-log.twig', [
+                    'errors' => $reg->getInputErrors(),
+        ]);
+    }
 });
 
-$app->post('/register', function () use ($app) {   
+$app->post('/register', function () use ($app) {
     $reg = new User\UserController();
     $reg->renderRegisterPage();
     return $app['twig']->render('form-reg.twig', [
-        'errors' => $reg->getInputErrors()
+                'errors' => $reg->getInputErrors()
     ]);
 });
 
@@ -88,13 +100,13 @@ $app->get('/profile', function() use ($app) {
     return $controller->renderPage();
 });
 
-$app->post('/change-pass', function () use ($app) {  
-    //diabelek: brak controlera
-    return $app['twig']->render('change-pass.twig', []);
-});
-
-$app->post('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {            
+$app->post('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {
     return $app->redirect('user-panel');
+});
+$app->post('/reset-pass', function () use ($app) {
+     $reg = new User\UserController();
+     $reg->renderRememberPasswordPage();
+   return $app['twig']->render('forgot-pass-confirm.twig');
 });
 
 $app->get('/apitest', function() use ($app) {
