@@ -14,9 +14,23 @@ namespace App;
  * @author RENT
  */
 class SearchController extends AbstractController {
-    public function renderPage()
-    {
+
+    public function renderPage() {
         
-        return $this->twig->render('search-page.twig');
+            $apiModel = new \WeatherAPI\Model\Current();
+
+            if (!isset($_GET['city'])) {
+                $temp = 'rome';
+            } else {
+                $temp = $_GET['city'];
+            }
+
+            $city = $apiModel->getWeather($temp);
+
+            return $this->twig->render('search-page.twig', [
+            'city' => $city
+            ]);
+        
     }
+
 }

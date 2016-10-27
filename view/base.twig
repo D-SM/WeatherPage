@@ -10,16 +10,14 @@
         <header>
             
         </header>
-        <div class="container searchbox">
-            
-        </div>
-        <div class="container">
+            {% include 'header.twig' %}
+        <div class="container main-container">
         {% block body %}
             TEST BODY
         {% endblock %}
         </div>
         <footer>
-            
+            {% include 'footer.twig' %}
         </footer>
     </body>
 </html>

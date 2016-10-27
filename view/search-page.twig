@@ -1,1 +1,16 @@
-searsh page
+{% extends "base.twig" %}
+{% block body %}
+    <h1>SEARCH PAGE</h1>
+    
+        <div class="city-box">
+
+            <ul>
+                <li><h4>{{ city['name'] }}</h4></li>
+                <li>Temperature: {{ city['temp'] }} *C</li>
+                <li>Pressure: {{ city['pressure'] }} hPa</li>
+                <li>Humility: {{ city['humidity'] }} %</li>
+                <li>Description: {{ city['description'] }}</li>
+            </ul>
+        </div>
+
+{% endblock %}
