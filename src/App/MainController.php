@@ -8,7 +8,10 @@
 
 namespace App;
 
-class MainController
-{
-
+class MainController extends AbstractController {
+    public function renderPage()
+    {
+        
+        return $this->twig->render('main-page.twig');
+    }
 }
