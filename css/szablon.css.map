@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAGA,IAAK;EACD,gBAAgB,EAAE,OAAO;;AAG7B,SAAU;EACN,OAAO,EAAE,YAAY;EACrB,MAAM,EAAE,iBAAiB;EACzB,gBAAgB,EAAE,KAAK;EACvB,KAAK,EAAE,KAAK;EACZ,UAAU,EAAE,oBAAoB;EAE9B,YAAK;IACH,OAAO,EAAE,QAAQ;EAEjB,YAAK;IACL,UAAU,EAAE,IAAI",
+"sources": ["szablon.scss"],
 "names": [],
 "file": "szablon.css"
 }

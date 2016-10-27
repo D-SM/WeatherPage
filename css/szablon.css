@@ -1,3 +1,15 @@
+body {
+  background-color: #efefef; }
 
+.city-box {
+  display: inline-block;
+  margin: 0px 10px 10px 0px;
+  background-color: white;
+  width: 300px;
+  box-shadow: 1px 1px 5px 0px #ddd; }
+  .city-box ul {
+    padding: 5px 10px; }
+  .city-box li {
+    list-style: none; }
 
 /*# sourceMappingURL=szablon.css.map */
