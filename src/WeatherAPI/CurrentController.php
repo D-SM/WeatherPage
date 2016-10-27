@@ -47,5 +47,5 @@ class CurrentController implements InterfaceController
             'humidity' => $avgHumidity
         ];
     }
-    
+
 }
