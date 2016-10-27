@@ -83,7 +83,8 @@ $app->get('/profile', function() use ($app) {
     return $controller->renderPage();
 });
 
-$app->post('/change-pass', function () use ($app) {   
+$app->post('/change-pass', function () use ($app) {  
+    //diabelek: brak controlera
     return $app['twig']->render('change-pass.twig', []);
 });
 
