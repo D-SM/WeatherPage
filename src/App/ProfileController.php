@@ -30,7 +30,4 @@ class ProfileController extends AbstractController{
             'cities' => $cities
             ]);
     }
-    public function iconCreator(){
-        
-    }
 }
