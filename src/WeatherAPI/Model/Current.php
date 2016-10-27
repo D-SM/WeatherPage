@@ -14,6 +14,9 @@ class Current extends AbstractModel {
     private function createUrl($city, $type) {
         return $this->url . $type . '?q=' . $city . '&units=metric&appid=' . $this->apiId;
     }
+    
+     // get jason
+
 
     public function getJason($city) {
         $this->currentWeather = json_decode(
@@ -29,8 +32,7 @@ class Current extends AbstractModel {
 
 
 
-        // get jason
-
+       
         return [
             'name' => $this->currentWeather['name'],
             'temp' => $this->currentWeather['main']['temp'],
