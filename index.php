@@ -85,7 +85,7 @@ $app->post('/register', function () use ($app) {
 
 $app->get('/', function() use ($app) {
     $controller = new MainController($app['twig']);
-    return $controller->renderPage();
+    return $controller->renderPage(1);
 });
 
 /* STRONA WYNIkU WYSZUKIWANIA */

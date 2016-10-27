@@ -41,7 +41,7 @@ class Current extends AbstractModel {
             'temp' => $this->data['main']['temp'],
             'pressure' => $this->data['main']['pressure'],
             'humidity' => $this->data['main']['humidity'],
-            'icon' => $val['weather'][0]['icon'],
+            'icon' => $this->data['weather'][0]['icon'],
             'description' => $this->data['weather'][0]['description']
         ];
     }
