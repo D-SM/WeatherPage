@@ -43,5 +43,25 @@ class User extends AbstractModel {
         }
         return false;
     }
+    public function updateHash($email,$hash){
+        
+        if($this->validateUserLogin($email)){
+            
+           $this->conn->query('UPDATE user set u_reset =  "'  . $hash .  ' " WHERE u_mail = "' . $email . '" '); 
+           return true;
+        }
+        
+        return false;
+    }
+    
+    
+    public function getHash($email){
+        
+        $result = $this->conn->query('SELECT (u_reset) FROM user WHERE u_mail = "' . $email . '" ');
+        
+        $hash = $result->fetch_assoc();
+        
+        return $hash['u_reset'];
+    }
     
 }
