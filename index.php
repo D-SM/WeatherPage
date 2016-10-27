@@ -10,6 +10,7 @@ $app = new \Silex\Application();
 
 use App\MainController;
 use App\SearchController;
+use App\ProfileController;
 
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path' => __DIR__ . '/view',
