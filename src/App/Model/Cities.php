@@ -23,6 +23,9 @@ class Cities extends AbstractModel {
                                 . ' AND city_name = ' . $city);
         $count = $result->fetch_assoc();
         $isCity = true;
+        
+        //diabelek: dwa punkty wyjścia - można by dać po prostu return $result === 0
+        //Ostatnia linia kigdy się nie wykona
         if ($count['count'] === 1) {
             // return zmiennej, która zaiwera wartość np true albo false
             // później na podstawie tej zmiennej w twig wyświetlamy, albo nie
