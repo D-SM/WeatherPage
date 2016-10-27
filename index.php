@@ -108,7 +108,13 @@ $app->get('/apitest', function() use ($app) {
 $app->get('test/', function() use ($app) {
     $apiModel = new \WeatherAPI\Model\Current();
     echo '<pre>';
-    return var_dump($apiModel->getWeather('Poznan'));
+//    var_dump($apiModel->getWeather('Poznan'));
+//    var_dump($apiModel->getForecast('Poznan'));
+  
+    $CurrentController = new \WeatherAPI\CurrentController('Poznan');
+    var_dump($CurrentController->getWeeklyAverages('Poznan'));
+    
+//    return var_dump($apiModel->getForecast('Poznan'));
 });
 
 $app->run();
