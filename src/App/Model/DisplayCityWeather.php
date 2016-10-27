@@ -10,6 +10,10 @@ namespace App\Model;
 
 class DisplayCityWeather {
     
-    public function __construct();
     
+    
+    public function __construct() {
+        
+    }
+       
 }

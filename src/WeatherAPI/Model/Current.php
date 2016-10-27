@@ -35,9 +35,6 @@ class Current extends AbstractModel {
         $this->getJson($url);
 
         $tmp = [];
-        $avg = 0;
-        $avgP = 0;
-        $avgH = 0;
 
         foreach ($this->data['list'] as $val) {
             $tmpArray = [
@@ -49,27 +46,8 @@ class Current extends AbstractModel {
             ];
 
             $tmp[date('d.m.Y H:i', $val['dt'])] = $tmpArray;
-            $avg += $val['main']['temp'];
-            $avgP += $val['main']['pressure'];
-            $avgH += $val['main']['humidity'];
         }
 
-        $avg = $avg / count($this->data['list']);
-        $avgP = $avgP / count($this->data['list']);
-        $avgH = $avgH / count($this->data['list']);
-
-        $return = [];
-        $return['days'] = $tmp;
-
-        $tmpArray = [
-            'temp' => $avg,
-            'pressure' => $avgP,
-            'humidity' => $avgH
-        ];
-
-        $return['avg'] = $tmpArray;
-
-        return $return;
+        return $tmp;
     }
-
 }
