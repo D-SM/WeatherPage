@@ -13,19 +13,35 @@ class User extends AbstractModel {
 
     public function registerUser($email, $password) {
 
-        $this->conn->query('insert into user (u_mail, u_pass) values ( "' . $email . '"  , "' . $password . '"  )');
+        $this->conn->query('insert into user (u_mail, u_pass) values ( "' . $email . '"  , "' . \User\Auth::sha1($password)  . '"  )');
+        
     }
 
-    public function validateUser($email) {
-
-        $result = $this->conn->query('SELECT count (u_id) as  count FROM user WHERE u_mail = ' . $email);
-
-        //diabelek: dwa punkty wyjścia - można by dać po prostu return $result === 0
-        if ($result === 0) {
+    public function validateUserLogin($email) {
+        $result = $this->conn->query('SELECT (u_id) FROM user WHERE u_mail = "' . $email . '" ');
+       
+      
+        if ($result->fetch_assoc()) {     
             return true;
-        } else {
+        } else {  
             return false;
         }
+    
     }
-
+    
+    
+    public function validateUserPassword($email, $password){
+        
+        if ($this->validateUserLogin($email)){
+            
+             $result = $this->conn->query('SELECT (u_pass) FROM user WHERE u_mail = "' . $email . '" ');
+             
+             $passDB = $result->fetch_assoc();
+             
+            return \User\Auth::sha1($password)  === $passDB['u_pass'];
+             
+        }
+        return false;
+    }
+    
 }
