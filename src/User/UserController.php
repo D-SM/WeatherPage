@@ -14,9 +14,9 @@ class UserController {
     public $errorsList = [];
 
     public function renderLoginPage() {
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        if (!empty($email) and ! empty($password)) {
+        $emaill = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $passwordd = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        if (!empty($emaill) and ! empty($passwordd)) {
             
         } else {
             array_push($this->errorsList, "Pola mają niepoprawny format");
@@ -33,11 +33,9 @@ class UserController {
         /* Walidacja inputów */
         $register = new Model\User();
         
-        if (!$register->validateUser($email)) {
+        if ($register->validateUserLogin($email)) {
             if (!empty($email) and ! empty($password) and ! empty($passwordConfirm)) {
                 if ($password === $passwordConfirm) {
-                    
-
                     $register->registerUser($email, $password);
                 } else {
                     array_push($this->errorsList, "Hasła nie są takie same");
@@ -58,8 +56,6 @@ class UserController {
         
     }
      public function getInputErrors() {
-         var_dump($this->errorsList);
-         die();
         return $this->errorsList;
     }
 

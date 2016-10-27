@@ -16,15 +16,15 @@ class User extends AbstractModel {
         $this->conn->query('insert into user (u_mail, u_pass) values ( "' . $email . '"  , "' . $password . '"  )');
     }
 
-    public function validateUser($email) {
-
-        $result = $this->conn->query('SELECT count (u_id) as  count FROM user WHERE u_mail = ' . $email);
-
-        if ($result === 0) {
+    public function validateUserLogin($email) {
+        $result = $this->conn->query('SELECT (u_id) FROM user WHERE u_mail = "' . $email . '" ');
+       
+      
+        if (!$result->fetch_assoc()) {     
             return true;
-        } else {
+        } else {  
             return false;
         }
     }
-
+    
 }

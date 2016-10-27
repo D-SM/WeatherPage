@@ -89,6 +89,7 @@ $app->post('/change-pass', function () use ($app) {
 
 $app->post('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {            
         return $app->redirect('user-panel');
+        });
 
 $app->get('apitest/', function() use ($app) {
 
@@ -97,5 +98,6 @@ $app->get('apitest/', function() use ($app) {
     return var_dump($apiModel->getWeather('Poznan'));
 //    return var_dump($apiModel->getForecast('Poznan'));
 });
+
 
 $app->run();
