@@ -1,0 +1,31 @@
+{% if errors is not empty %}
+   <ul class="errors">
+   {% for e in errors %}
+       <li>{{ e }}</li>
+   {% endfor %}
+   </ul>
+{% endif %}
+
+
+
+<form method="post" action="">
+    <ul>
+        <li>
+            <label>Login</label>
+            <input type="email" name="email" value="{{ email }}" placeholder="E-mail" required/>
+        </li>
+        <li>
+            <label>Hasło</label>
+            <input type="password" name="password" placeholder="Hasło" required />
+        </li>    
+        <li>
+            <label>Powtórz hasło</label>
+            <input type="password" name="password-confirm" placeholder="Powtórz hasło" required />
+        </li>
+        <li>
+            <button>Rejestruj</button>
+        </li>
+    </ul>    
+</form>
+        
+  
