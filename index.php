@@ -10,6 +10,7 @@ $app = new \Silex\Application();
 
 use App\MainController;
 use App\SearchController;
+use App\ProfileController;
 
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path' => __DIR__ . '/view',
@@ -19,14 +20,14 @@ $app['twig']->addGlobal('webPath', WEB_PATH);
 
 /* WIDOK REJESTRACJI */
 //diabelek: kiepska nazwa rutingu = dlaczego nie register?
-$app->get('/form-reg', function () use ($app) {
+$app->get('/register', function () use ($app) {
     //diabelek: brak controlera
     return $app['twig']->render('form-reg.twig');
 });
 
 /* WIDOK LOGOWANIA */
 //diabelek: kiepska nazwa rutingu = dlaczego nie login?
-$app->get('/form-log', function () use ($app) {
+$app->get('/login', function () use ($app) {
     //diabelek: brak controlera
     return $app['twig']->render('form-log.twig');
 });
@@ -43,22 +44,26 @@ $app->get('/user-panel', function () use ($app) {
     return $app['twig']->render('user-panel.twig',[]);
 });
 
-$app->get('/forgot-pass', function () use ($app) {
+$app->get('/reset-pass', function () use ($app) {
     //diabelek: brak controlera
     return $app['twig']->render('forgot-pass.twig');
 });
 
-$app->get('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {
+$app->get('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {
     //diabelek: brak controlera
     return $app['twig']->render('forgot-pass-confirm.twig', []);
 });
 
-$app->post('/form-log', function () use ($app) {
+$app->post('/login', function () use ($app) {
     //diabelek: brak controlera
-    return $app['twig']->render('form-log.twig',[]);
+     $reg = new User\UserController();
+     $reg->renderLoginPage();
+    return $app['twig']->render('form-log.twig',[
+      'errors' => $reg->getInputErrors()  
+    ]);
 });
 
-$app->post('/form-reg', function () use ($app) {   
+$app->post('/register', function () use ($app) {   
     $reg = new User\UserController();
     $reg->renderRegisterPage();
     return $app['twig']->render('form-reg.twig', [
@@ -88,16 +93,28 @@ $app->post('/change-pass', function () use ($app) {
     return $app['twig']->render('change-pass.twig', []);
 });
 
-$app->post('/forgot-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {            
+$app->post('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {            
     return $app->redirect('user-panel');
 });
 
 $app->get('/apitest', function() use ($app) {
     $apiModel = new \WeatherAPI\Model\Current();
-    echo '<pre>';
-    return var_dump($apiModel->getWeather('Poznan'));
+//    echo '<pre>';
+//    var_dump($apiModel->getWeather('Poznan'));
+    return $app->json($apiModel->getWeather('Poznan'));
 //    return var_dump($apiModel->getForecast('Poznan'));
 });
 
+$app->get('test/', function() use ($app) {
+    $apiModel = new \WeatherAPI\Model\Current();
+    echo '<pre>';
+//    var_dump($apiModel->getWeather('Poznan'));
+//    var_dump($apiModel->getForecast('Poznan'));
+  
+    $CurrentController = new \WeatherAPI\CurrentController('Poznan');
+    var_dump($CurrentController->getWeeklyAverages('Poznan'));
+    
+//    return var_dump($apiModel->getForecast('Poznan'));
+});
 
 $app->run();

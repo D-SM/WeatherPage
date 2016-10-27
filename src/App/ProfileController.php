@@ -16,7 +16,18 @@ namespace App;
 class ProfileController extends AbstractController{
     public function renderPage()
     {
+        $apiModel = new \WeatherAPI\Model\Current();
         
-        return $this->twig->render('profile-page.twig');
+        // @todo odczytanie jakie miasta sa w profilu
+        
+        $cities = [];
+        
+        //@todo foreach po odczytanych miastach
+        $cities[] = $apiModel->getWeather('warsaw');
+        $cities[] = $apiModel->getWeather('berlin');
+
+        return $this->twig->render('profile-page.twig', [
+            'cities' => $cities
+            ]);
     }
 }

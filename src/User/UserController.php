@@ -14,9 +14,18 @@ class UserController {
     public $errorsList = [];
 
     public function renderLoginPage() {
-        $emaill = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        $passwordd = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        if (!empty($emaill) and ! empty($passwordd)) {
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+       
+        if (!empty($email) and ! empty($password)) {
+             $login = new Model\User();
+            if ($login->validateUserPassword($email, $password)){
+                
+                array_push($this->errorsList, "ZALOGOWANO");
+                
+            }else{
+              array_push($this->errorsList, "Nieporawny login lub hasło") ; 
+            }
             
         } else {
             array_push($this->errorsList, "Pola mają niepoprawny format");
@@ -33,7 +42,7 @@ class UserController {
         /* Walidacja inputów */
         $register = new Model\User();
         
-        if ($register->validateUserLogin($email)) {
+        if (!$register->validateUserLogin($email)) {
             if (!empty($email) and ! empty($password) and ! empty($passwordConfirm)) {
                 if ($password === $passwordConfirm) {
                     $register->registerUser($email, $password);
