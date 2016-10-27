@@ -11,13 +11,11 @@ namespace User;
 
 class UserController {
 
- 
+    public $errorsList = [];
 
     public function renderLoginPage() {
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        $this->password = $password;
-        $this->email = $email;
         if (!empty($email) and ! empty($password)) {
             
         } else {
@@ -33,14 +31,22 @@ class UserController {
         $this->email = $email;
 
         /* Walidacja inputów */
-        if (!empty($email) and ! empty($password) and ! empty($passwordConfirm)) {
-            if ($password === $passwordConfirm) {
-                $this->registerUser($email, $password);
+        $register = new Model\User();
+        
+        if (!$register->validateUser($email)) {
+            if (!empty($email) and ! empty($password) and ! empty($passwordConfirm)) {
+                if ($password === $passwordConfirm) {
+                    
+
+                    $register->registerUser($email, $password);
+                } else {
+                    array_push($this->errorsList, "Hasła nie są takie same");
+                }
             } else {
-                array_push($this->errorsList, "Hasła nie są takie same");
+                array_push($this->errorsList, "Pola mają niepoprawny format");
             }
-        } else {
-            array_push($this->errorsList, "Pola mają niepoprawny format");
+        }else {
+            array_push($this->errorsList, "Mail już istnieje");
         }
     }
 
@@ -50,6 +56,11 @@ class UserController {
 
     public function logout() {
         
+    }
+     public function getInputErrors() {
+         var_dump($this->errorsList);
+         die();
+        return $this->errorsList;
     }
 
 }

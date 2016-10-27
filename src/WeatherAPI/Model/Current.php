@@ -18,6 +18,8 @@ class Current extends AbstractModel {
 
     public function getWeather($city) {
         $url = $this->createUrl($city, 'weather');
+        
+        //diabelek: getJeson zwraca coś returnem, ale nei jest to wykorzystywane nigdzie....
         $this->getJson($url);
         return [
             'name' => $this->data['name'],
