@@ -26,6 +26,12 @@ class User extends AbstractModel {
             return false;
         }
     }
+    
+    public function getID($email) {
+        $result = $this->conn->query('SELECT (u_id) FROM user WHERE u_mail = "' . $email . '" ');
+          $id = $result->fetch_assoc();
+          return $id;  
+    }
 
     public function validateUserPassword($email, $password) {
 

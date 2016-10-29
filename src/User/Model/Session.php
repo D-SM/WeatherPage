@@ -24,6 +24,14 @@ class Session {
 
         $_SESSION['email'] = $email;
     }
+    public static function saveID($id) {
+
+        $_SESSION['id'] = $id;
+    }
+       public static function getId() {
+
+       return $_SESSION['id'] ;
+    }
 
     /* Pobranie emaila uzytownika z sesji */
 
