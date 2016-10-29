@@ -95,7 +95,7 @@ $app->get('/search', function() use ($app) {
 });
 
 /* STRONA PROFILU */
-$app->get('/profile', function() use ($app) {
+$app->post('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
     return $controller->renderPage();
 });

@@ -5,6 +5,8 @@
  *
  * @author Scott
  */
+namespace App\Model;
+
 class Cities extends AbstractModel {
     
     public function getCities($id) {

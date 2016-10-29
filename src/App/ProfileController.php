@@ -21,9 +21,11 @@ class ProfileController extends AbstractController {
         $cities[] = $apiModel->getWeatherByCityName('berlin');
         
         
-        $alertObj = new \Model\Cities();
+        $alertObj = new Model\Cities();
 // @todo odczytanie jakie miasta sa w profilu
         $addingStatus = false;
+        $removeStatus = false;
+        
         if (isset($_POST['addingCity'])){
             $addingStatus = $alertObj->addCity;
         }
@@ -34,7 +36,8 @@ class ProfileController extends AbstractController {
         return $this->twig->render('profile-page.twig', [
                     'cities' => $cities,
                     'alertAddCity' => $addingStatus,
-                    'alertRemoveCity' => $removeStatus
+                    'alertRemoveCity' => $removeStatus,
+            
         ]);
     }
 
