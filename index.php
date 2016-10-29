@@ -78,7 +78,6 @@ $app->get('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($a
     $resetPasswordConfirmation = new User\UserController();
 
     if ($resetPasswordConfirmation->validateInputs($email, $hash)) {
-
         return $app['twig']->render('reset-pass.twig');
     }
     return $app['twig']->render('error.twig');
@@ -89,8 +88,9 @@ $app->post('/login', function () use ($app ) {
     //diabelek: brak controlera
     $reg = new User\UserController();
     $reg->renderLoginPage();
+   
     if ($reg->renderLoginPage()) {
-
+     
         return $app->redirect('user-panel');
     } else {
         return $app['twig']->render('form-log.twig', [
