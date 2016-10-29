@@ -22,6 +22,22 @@
             </div>
         {% endfor %}
     </div>
+    <h1>FORECAST</h1>
+    <div class="row">
+        {% for weather in forecast %}
+            <div class="col-md-4 col-sm-6 cal-xs-12">
+                <div class="city-box ">
+                    <ul>
+                        <li><h4>{{ weather['date'] }}</h4></li>
+                        <li>Temperature: {{ weather['temp'] }} *C</li>
+                        <li>Pressure: {{ weather['pressure'] }} hPa</li>
+                        <li>Humidity: {{ weather['humidity'] }} %</li>
+                        <li>Description: {{ weather['description'] }}</li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 
 {% endblock %}
