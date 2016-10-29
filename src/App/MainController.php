@@ -33,7 +33,7 @@ class MainController extends AbstractController {
 
             return $this->twig->render('main-page.twig', [
                         'cities' => $cities,
-                           'alert' => $alert,  
+                         'alert' => $alert,  
             ]);
         }
     
