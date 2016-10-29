@@ -47,7 +47,7 @@ class Current extends AbstractModel {
     }
 
     public function getForecast($city) {
-        $url = $this->createUrl($city, 'forecast');
+        $url = $this->createUrlByCity($city, 'forecast');
         $this->getJson($url);
 
         $tmp = [];
