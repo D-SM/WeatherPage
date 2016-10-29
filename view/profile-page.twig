@@ -1,8 +1,11 @@
 {% extends "base.twig" %}
 {% block body %}
     <h1>PROFILE</h1>
-
-    <div div="row">
+    
+{#    {% if addingStatus %}#}
+        {% include 'alerts/city-added.twig' %}
+{#    {% endif %}#}
+    <div class="row">
         {% for weather in cities %}
             <div class="col-md-4 col-sm-6 cal-xs-12">
                 <div class="city-box">

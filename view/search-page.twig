@@ -1,10 +1,6 @@
 {% extends "base.twig" %}
 {% block body %}
     
-    {% if addingStatus %}
-        
-        
-    {% endif %}
     <h1>SEARCH PAGE</h1>
     
         <div class="city-box">
@@ -16,7 +12,10 @@
                 <li>Humidity: {{ city['humidity'] }} %</li>
                 <li>Description: {{ city['description'] }}</li>
             </ul>
-            
+            <form class="add-city">
+                <input name="addingCity" method="post" type="hidden">
+                <button type="submit">X</button>
+            </form>
         </div>
 
 {% endblock %}
