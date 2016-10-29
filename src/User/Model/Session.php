@@ -21,15 +21,12 @@ class Session {
     /* Zapisanie emaila użytkownika w sesji */
 
     public static function saveName($email) {
-
         $_SESSION['email'] = $email;
     }
     public static function saveID($id) {
-
         $_SESSION['id'] = $id;
     }
        public static function getId() {
-
        return $_SESSION['id'] ;
     }
 

@@ -53,7 +53,8 @@ $app->post('/change-pass', function () use ($app) {
 $app->get('/user-panel', function () use ($app ) {
     if ($_SESSION) {
         return $app['twig']->render('user-panel.twig', [
-                    'email' => User\Model\Session::getName()
+                    'email' => User\Model\Session::getName(),
+                    'id'  =>  User\Model\Session::getId()
         ]);
     } else {
         return $app->redirect('/phpjspoz1/login');
