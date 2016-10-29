@@ -25,7 +25,7 @@ class ProfileController extends AbstractController {
         $removeStatus = false;
         $addStatus = false;
         if (isset($_POST['addingCity'])) {
-            $addStatus = $citiesObj->addCity();
+            $addStatus = $citiesObj->addCity(1, 'poznan');
         }
         if (isset($_POST['removingCity'])) {
             $removeStatus = $citiesObj->deleteCity();
