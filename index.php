@@ -42,32 +42,55 @@ $app->get('/change-pass', function () use ($app) {
     return $app['twig']->render('change-pass.twig');
 });
 
+$app->post('/change-pass', function () use ($app) {
+    //diabelek: brak controlera
+    $changePass = new User\UserController();
+    $changePass->changePassword();
+    return $app->redirect('user-panel');
+});
+
 /* WIDOK PANELU UŻYTKOWNIKA */
 $app->get('/user-panel', function () use ($app ) {
-    //diabelek: brak controlera
-    return $app['twig']->render('user-panel.twig', [
-        'email' => User\Model\Session::getName()
-    ]);
+    if ($_SESSION) {
+        return $app['twig']->render('user-panel.twig', [
+                    'email' => User\Model\Session::getName()
+        ]);
+    } else {
+        return $app->redirect('/phpjspoz1/login');
+    }
+});
+$app->post('/user-panel', function () use ($app ) {
+    session_unset();
+    return $app->redirect('/phpjspoz1/login');
 });
 
 $app->get('/reset-pass', function () use ($app) {
     //diabelek: brak controlera
     return $app['twig']->render('forgot-pass.twig');
 });
+$app->post('/reset-passs', function () use ($app) {
+    $resetPass = new User\UserController();
+    $resetPass->resetPassword();
+    return $app->redirect('login');
+});
 
 $app->get('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {
-    //diabelek: brak controlera
-    return $app['twig']->render('forgot-pass-confirm.twig', []);
+    $resetPasswordConfirmation = new User\UserController();
+
+    if ($resetPasswordConfirmation->validateInputs($email, $hash)) {
+        return $app['twig']->render('reset-pass.twig');
+    }
+    return $app['twig']->render('error.twig');
 });
+
 
 $app->post('/login', function () use ($app ) {
     //diabelek: brak controlera
     $reg = new User\UserController();
     $reg->renderLoginPage();
-    
-
+   
     if ($reg->renderLoginPage()) {
-
+     
         return $app->redirect('user-panel');
     } else {
         return $app['twig']->render('form-log.twig', [
@@ -105,13 +128,21 @@ $app->post('/profile', function() use ($app) {
     return $controller->renderPage();
 });
 
+
+
 $app->post('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {
-    return $app->redirect('user-panel');
+    $session = new User\Model\Session();
+    User\Model\Session::saveName($email);
+    $resetPass = new User\UserController();
+    $resetPass->resetPassword();
+    $cleanHash = new User\Model\User();
+    $cleanHash->removeHash($email);
+    return $app->redirect('/phpjspoz1/login');
 });
 $app->post('/reset-pass', function () use ($app) {
-     $reg = new User\UserController();
-     $reg->renderRememberPasswordPage();
-   return $app['twig']->render('forgot-pass-confirm.twig');
+    $reg = new User\UserController();
+    $reg->renderRememberPasswordPage();
+    return $app['twig']->render('send-mail.twig');
 });
 
 $app->get('/apitest', function() use ($app) {
@@ -129,7 +160,6 @@ $app->get('test/', function() use ($app) {
     echo '<pre>';
 //    var_dump($apiModel->getWeather('Poznan'));
 //    var_dump($apiModel->getForecast('Poznan'));
-  
 //    $CurrentController = new \WeatherAPI\CurrentController('Poznan');
 //    var_dump($CurrentController->getWeeklyAverages('Poznan'));
 //    return var_dump($apiModel->getForecast('Poznan'));

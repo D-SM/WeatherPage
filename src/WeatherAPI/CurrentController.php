@@ -18,7 +18,7 @@ class CurrentController implements InterfaceController
         
         public function __construct($city) {
         $this->forecast = new \WeatherAPI\Model\Current($city);
-        $this->data = $this->forecast->getForecast($city); 
+        $this->data = $this->forecast->getForecast($city);
         }
 
         public function getData() {
@@ -31,21 +31,21 @@ class CurrentController implements InterfaceController
         $avgPressure = 0;
         $avgHumidity = 0;
         
-        foreach ($this->data as $val) {
-            $avgTemperature += $val['temp'];
-            $avgPressure += $val['pressure'];
-            $avgHumidity += $val['humidity'];
+            foreach ($this->data as $val) {
+                $avgTemperature += $val['temp'];
+                $avgPressure += $val['pressure'];
+                $avgHumidity += $val['humidity'];
+            }
+
+            $avgTemperature = round($avgTemperature / count($this->data));
+            $avgPressure = round($avgPressure / count($this->data));
+            $avgHumidity = round($avgHumidity / count($this->data));
+
+            return $averageWeather = [
+                'temp' => $avgTemperature,
+                'pressure' => $avgPressure,
+                'humidity' => $avgHumidity
+            ];
         }
-
-        $avgTemperature = round($avgTemperature / count($this->data));
-        $avgPressure = round($avgPressure / count($this->data));
-        $avgHumidity = round($avgHumidity / count($this->data));
-
-        return $averageWeather = [
-            'temp' => $avgTemperature,
-            'pressure' => $avgPressure,
-            'humidity' => $avgHumidity
-        ];
-    }
 
 }

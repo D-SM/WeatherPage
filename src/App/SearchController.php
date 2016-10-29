@@ -31,6 +31,7 @@ class SearchController extends AbstractController {
             'city' => $city,
                 'addingStatus' => false,
                 'cityToAdd' => $cityToAdd
+                
             ]);
         
     }

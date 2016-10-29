@@ -24,18 +24,13 @@ class ProfileController extends AbstractController {
 
         $removeStatus = false;
         $addStatus = false;
-        /* @todo
-         * Zróbcie lepsze sprawdzanie inputów, zobaczcie jak zrobili 
-         * to w GeologController.php
-         */
+       
+     
         if (isset($_POST['addingCity'])) {
-            
-            /*
-             * A gdzie walidacja inputów? Trzeba sprawdzić czy 1 parametr jest
-             * intem, a drugi czy jest stringiem
-             */
-            
-            $addStatus = $citiesObj->addCity(1, 'poznan');
+               
+            $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
+
+            $addStatus = $citiesObj->addCity($city);
         }
         if (isset($_POST['removingCity'])) {
             $removeStatus = $citiesObj->deleteCity();
