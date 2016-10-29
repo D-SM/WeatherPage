@@ -52,8 +52,16 @@ $app->post('/change-pass', function () use ($app) {
 /* WIDOK PANELU UŻYTKOWNIKA */
 $app->get('/user-panel', function () use ($app ) {
     if ($_SESSION) {
+//        $id = new \User\Model\Session();
+//        $id->getId();
+        $id = new \User\Model\User();
+        $email = User\Model\Session::getName();
+        $test = $id->getID($email);
+        
+        
         return $app['twig']->render('user-panel.twig', [
-                    'email' => User\Model\Session::getName()
+                    'email' => User\Model\Session::getName(),
+                   
         ]);
     } else {
         return $app->redirect('/phpjspoz1/login');

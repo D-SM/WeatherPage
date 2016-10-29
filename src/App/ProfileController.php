@@ -25,15 +25,13 @@ class ProfileController extends AbstractController {
         $removeStatus = false;
         $addStatus = false;
        
-     
-        if (isset($_POST['addingCity'])) {
-               
-            $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
-
+        $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
+        
+        if (!empty(filter_input(INPUT_POST, 'addingCity', FILTER_SANITIZE_STRING))) {
             $addStatus = $citiesObj->addCity($city);
         }
-        if (isset($_POST['removingCity'])) {
-            $removeStatus = $citiesObj->deleteCity();
+        if (!empty(filter_input(INPUT_POST, 'removingCity', FILTER_SANITIZE_STRING))) {
+            $removeStatus = $citiesObj->deleteCity($city);
         }
 
         return $this->twig->render('profile-page.twig', [
