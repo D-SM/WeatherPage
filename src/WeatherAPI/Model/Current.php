@@ -9,10 +9,10 @@ class Current extends AbstractModel {
     private function createUrlByCity($city, $type) {
         return $this->url . $type . '?q=' . $city . '&units=metric&appid=' . $this->apiId;
     }
-
-    private function createUrlByCoordinates($coordinates, $type) {
-        return $this->url . $type . '?lat={' . $coordinates[0] . '}&lon={'
-                . $coordinates[1] . '}' . $city . '&units=metric&appid=' . $this->apiId;
+    
+    private function createUrlByCoordinates($latitude, $longitude, $type) {
+        return $this->url . $type . '?lat=' . $latitude . '&lon=' 
+                . $longitude . '&units=metric&appid=' . $this->apiId;
     }
 
     private function getJson($url) {
@@ -27,11 +27,11 @@ class Current extends AbstractModel {
 
         return $this->getWeather($this->data);
     }
-
-    public function getWeatherByCoordinates($coordinates) {
-        $url = $this->createUrlByCoordinates($coordinates, 'weather');
-        $this->getJson($url);
-
+    
+    public function getWeatherByCoordinates($latitude, $longitude) {
+        $url = $this->createUrlByCoordinates($latitude, $longitude, 'weather');
+        $this->getJson($url);     
+        
         return $this->getWeather($this->data);
     }
 
@@ -78,7 +78,7 @@ class Current extends AbstractModel {
     }
 
     public function getForecast($city) {
-        $url = $this->createUrl($city, 'forecast');
+        $url = $this->createUrlByCity($city, 'forecast');
         $this->getJson($url);
 
         $tmp = [];

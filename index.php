@@ -1,7 +1,8 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-ini_set("display_errors", 1);
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/const.php';
@@ -41,30 +42,53 @@ $app->get('/change-pass', function () use ($app) {
     return $app['twig']->render('change-pass.twig');
 });
 
+$app->post('/change-pass', function () use ($app) {
+    //diabelek: brak controlera
+    $changePass = new User\UserController();
+    $changePass->changePassword();
+    return $app->redirect('user-panel');
+});
+
 /* WIDOK PANELU UŻYTKOWNIKA */
 $app->get('/user-panel', function () use ($app ) {
-    //diabelek: brak controlera
-    return $app['twig']->render('user-panel.twig', [
-        'email' => User\Model\Session::getName()
-    ]);
+    if ($_SESSION) {
+        return $app['twig']->render('user-panel.twig', [
+                    'email' => User\Model\Session::getName()
+        ]);
+    } else {
+        return $app->redirect('/phpjspoz1/login');
+    }
+});
+$app->post('/user-panel', function () use ($app ) {
+    session_unset();
+    return $app->redirect('/phpjspoz1/login');
 });
 
 $app->get('/reset-pass', function () use ($app) {
     //diabelek: brak controlera
     return $app['twig']->render('forgot-pass.twig');
 });
+$app->post('/reset-passs', function () use ($app) {
+    $resetPass = new User\UserController();
+    $resetPass->resetPassword();
+    return $app->redirect('login');
+});
 
 $app->get('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {
-    //diabelek: brak controlera
-    return $app['twig']->render('forgot-pass-confirm.twig', []);
+    $resetPasswordConfirmation = new User\UserController();
+
+    if ($resetPasswordConfirmation->validateInputs($email, $hash)) {
+
+        return $app['twig']->render('reset-pass.twig');
+    }
+    return $app['twig']->render('error.twig');
 });
+
 
 $app->post('/login', function () use ($app ) {
     //diabelek: brak controlera
     $reg = new User\UserController();
     $reg->renderLoginPage();
-    
-
     if ($reg->renderLoginPage()) {
 
         return $app->redirect('user-panel');
@@ -96,17 +120,29 @@ $app->get('/search', function() use ($app) {
 
 /* STRONA PROFILU */
 $app->get('/profile', function() use ($app) {
+       $controller = new ProfileController($app['twig']);
+        return $controller->renderPage();
+});
+$app->post('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
     return $controller->renderPage();
 });
 
+
+
 $app->post('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {
-    return $app->redirect('user-panel');
+    $session = new User\Model\Session();
+    User\Model\Session::saveName($email);
+    $resetPass = new User\UserController();
+    $resetPass->resetPassword();
+    $cleanHash = new User\Model\User();
+    $cleanHash->removeHash($email);
+    return $app->redirect('/phpjspoz1/login');
 });
 $app->post('/reset-pass', function () use ($app) {
-     $reg = new User\UserController();
-     $reg->renderRememberPasswordPage();
-   return $app['twig']->render('forgot-pass-confirm.twig');
+    $reg = new User\UserController();
+    $reg->renderRememberPasswordPage();
+    return $app['twig']->render('send-mail.twig');
 });
 
 $app->get('/apitest', function() use ($app) {
@@ -124,16 +160,29 @@ $app->get('test/', function() use ($app) {
     echo '<pre>';
 //    var_dump($apiModel->getWeather('Poznan'));
 //    var_dump($apiModel->getForecast('Poznan'));
-  
 //    $CurrentController = new \WeatherAPI\CurrentController('Poznan');
 //    var_dump($CurrentController->getWeeklyAverages('Poznan'));
 //    return var_dump($apiModel->getForecast('Poznan'));
 });
 
 $app->get('/apigeo', function() use ($app) {
+    ?>
+    <script
+       accesskey="" src="https://code.jquery.com/jquery-3.1.1.min.js"
+       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+       crossorigin="anonymous"></script>
+    <script src='js/main.js'></script>
+    <?php
+    return '';
+});
+
+$app->post('/apigeo', function() use ($app) {
     
     
-    
+    $location = \WeatherAPI\GeolocController::getWeatherByCoordinates();
+    return $app['twig']->render('geolocation.twig', [
+                    'location' => $location
+        ]);
 });
 
 $app->run();

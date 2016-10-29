@@ -1,5 +1,6 @@
 {% extends "base.twig" %}
 {% block body %}
+    
     <h1>SEARCH PAGE</h1>
     
         <div class="city-box">
@@ -8,9 +9,14 @@
                 <li><h4>{{ city['name'] }}</h4></li>
                 <li>Temperature: {{ city['temp'] }} *C</li>
                 <li>Pressure: {{ city['pressure'] }} hPa</li>
-                <li>Humility: {{ city['humidity'] }} %</li>
+                <li>Humidity: {{ city['humidity'] }} %</li>
                 <li>Description: {{ city['description'] }}</li>
             </ul>
+            <form class="add-city" action="{{ webPath}}profile" method="post">
+                <input name="city"  type="hidden" value="{{ cityToAdd }}">
+                <input name="addingCity"  type="hidden" value="true">
+                <button type="submit">+</button>
+            </form>
         </div>
 
 {% endblock %}
