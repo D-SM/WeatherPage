@@ -3,11 +3,13 @@
 
 body {
     background-color: #efefef;
+    margin-top: 54px;
 }
 
-.logo {
+h2.logo {
     color: white;
     margin-top: 10px;
+    max-width: 200px;
     
     & a {
     color: white;
@@ -30,9 +32,9 @@ body {
 }
 .city-box {
     display: inline-block;
-    margin: 0px 10px 10px 0px;
+    margin: 10px 0px;
     background-color: white;
-    width: 300px;
+    width: 100%;
     box-shadow: 1px 1px 5px 0px #ddd;
     
       & ul {
@@ -40,5 +42,18 @@ body {
     }
         & li {
         list-style: none;
+    }
+}
+
+.login-reg a {
+    color: white;
+    float: left;
+    margin-left: 25px;
+    margin-top: 17px;
+}
+
+@media (max-width: 767px) {
+    body {
+        margin-top: 104px;
     }
 }

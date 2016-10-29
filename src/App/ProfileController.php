@@ -8,26 +8,33 @@
 
 namespace App;
 
-/**
- * Description of profileController
- *
- * @author RENT
- */
-class ProfileController extends AbstractController{
-    public function renderPage()
-    {
+class ProfileController extends AbstractController {
+
+    public function renderPage() {
+
         $apiModel = new \WeatherAPI\Model\Current();
-        
-        // @todo odczytanie jakie miasta sa w profilu
-        
         $cities = [];
-        
-        //@todo foreach po odczytanych miastach
-        $cities[] = $apiModel->getWeatherByCityName('warsaw');
-        $cities[] = $apiModel->getWeatherByCityName('berlin');
+        $citiesObj = new Model\Cities();
+
+        $userCities = $citiesObj->getCities();
+
+        foreach ($userCities as $key) {
+            $cities[] = $apiModel->getWeatherByCityName($key[1]);
+        }
+
+        $removeStatus = false;
+        $addStatus = false;
+        if (isset($_POST['addingCity'])) {
+            $addStatus = $citiesObj->addCity(1, 'poznan');
+        }
+        if (isset($_POST['removingCity'])) {
+            $removeStatus = $citiesObj->deleteCity();
+        }
 
         return $this->twig->render('profile-page.twig', [
-            'cities' => $cities
-            ]);
+                    'cities' => $cities,
+                    'alertAddCity' => $addStatus,
+                    'alertRemoveCity' => $removeStatus
+        ]);
     }
 }

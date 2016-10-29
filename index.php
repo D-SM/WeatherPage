@@ -1,7 +1,8 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-ini_set("display_errors", 1);
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/const.php';
@@ -96,6 +97,10 @@ $app->get('/search', function() use ($app) {
 
 /* STRONA PROFILU */
 $app->get('/profile', function() use ($app) {
+       $controller = new ProfileController($app['twig']);
+        return $controller->renderPage();
+});
+$app->post('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
     return $controller->renderPage();
 });
@@ -131,8 +136,19 @@ $app->get('test/', function() use ($app) {
 });
 
 $app->get('/apigeo', function() use ($app) {
+    ?>
+    <script
+       accesskey="" src="https://code.jquery.com/jquery-3.1.1.min.js"
+       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+       crossorigin="anonymous"></script>
+    <script src='js/main.js'></script>
+    <?php
+    return '';
+});
+
+$app->post('/apigeo', function() use ($app) {
     
-    
+    return \WeatherAPI\GeolocController::getWeatherByCoordinates();
     
 });
 
