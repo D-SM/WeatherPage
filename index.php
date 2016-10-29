@@ -130,12 +130,6 @@ $app->get('test/', function() use ($app) {
 //    return var_dump($apiModel->getForecast('Poznan'));
 });
 
-$app->post('/apigeo', function() use ($app) {
-    
-    return \WeatherAPI\GeolocController::getWeatherByCoordinates();
-    
-});
-
 $app->get('/apigeo', function() use ($app) {
     ?>
     <script
@@ -145,6 +139,12 @@ $app->get('/apigeo', function() use ($app) {
     <script src='js/main.js'></script>
     <?php
     return '';
+});
+
+$app->post('/apigeo', function() use ($app) {
+    
+    return \WeatherAPI\GeolocController::getWeatherByCoordinates();
+    
 });
 
 $app->run();
