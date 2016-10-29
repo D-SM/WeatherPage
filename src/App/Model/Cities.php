@@ -9,11 +9,8 @@ namespace App\Model;
 class Cities extends AbstractModel {
     private $id;
     
-    public function getId(){
-        $idObj = new \User\Model\User();
-        $email = User\Model\Session::getName();
-        $id = $idObj->getID($email);
-        $this->id = $id;
+    public function __construct(){ 
+        $this->id = \User\Model\Session::getId();
     }
   
     public function getCities() {
