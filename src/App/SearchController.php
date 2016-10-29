@@ -28,7 +28,8 @@ class SearchController extends AbstractController {
             $city = $apiModel->getWeatherByCityName($temp);
 
             return $this->twig->render('search-page.twig', [
-            'city' => $city
+            'city' => $city,
+                'addingStatus' => false
             ]);
         
     }

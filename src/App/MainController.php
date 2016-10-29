@@ -26,6 +26,10 @@ class MainController extends AbstractController {
 //        };
         $cities[] = $apiModel->getWeatherByCityName('warsaw');
         $cities[] = $apiModel->getWeatherByCityName('berlin');
+        $cities[] = $apiModel->getWeatherByCityName('london');
+        $cities[] = $apiModel->getWeatherByCityName('rome');
+        $cities[] = $apiModel->getWeatherByCityName('paris');
+        $cities[] = $apiModel->getWeatherByCityName('moscow');
 
             return $this->twig->render('main-page.twig', [
                         'cities' => $cities
