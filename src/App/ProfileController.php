@@ -24,10 +24,10 @@ class ProfileController extends AbstractController {
         $removeStatus = false;
         $addStatus = false;
         if (isset($_POST['addingCity'])) {
-            $addStatus = $citiesObj->addCity;
+            $addStatus = $citiesObj->addCity();
         }
         if (isset($_POST['removingCity'])) {
-            $removeStatus = $citiesObj->deleteCity;
+            $removeStatus = $citiesObj->deleteCity();
         }
 
         return $this->twig->render('profile-page.twig', [
