@@ -28,7 +28,8 @@ class MainController extends AbstractController {
         $cities[] = $apiModel->getWeatherByCityName('berlin');
 
             return $this->twig->render('main-page.twig', [
-                        'cities' => $cities
+                        'cities' => $cities,
+                           'alert' => $alert,  
             ]);
         }
     
