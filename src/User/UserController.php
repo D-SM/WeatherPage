@@ -104,4 +104,68 @@ class UserController {
         return $this->errorsList;
     }
 
+    public function validateInputs($email, $hash) {
+
+
+        $user = new Model\User();
+        $changed = false;
+
+        if ($user->validateUserLogin($email) and $user->getHash($email) === $hash) {
+            $changed = true;
+        } else {
+
+            array_push($this->errorsList, "Błędne dane");
+        }
+
+
+        return $changed;
+    }
+
+    public function changePassword() {
+        $passwordOld = filter_input(INPUT_POST, 'password-old', FILTER_SANITIZE_STRING);
+        $passwordNew = filter_input(INPUT_POST, 'password-new', FILTER_SANITIZE_STRING);
+        $passwordConfirmNew = filter_input(INPUT_POST, 'password-confirm-new', FILTER_SANITIZE_STRING);
+
+        if (!empty($passwordOld) and ! empty($passwordNew) and ! empty($passwordConfirmNew)) {
+            if ($passwordNew === $passwordConfirmNew) {
+                $pass = new Model\User();
+                $email = Model\Session::getName();
+                $pass->updatePassword($email, $passwordNew);
+            } else {
+                array_push($this->errorsList, "Hasła nie są takie same");
+            }
+        } else {
+            array_push($this->errorsList, "Pola mają niepoprawny format");
+        }
+    }
+
+    public function resetPassword() {
+        $passwordNew = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $passwordConfirmNew = filter_input(INPUT_POST, 'password-confirm', FILTER_SANITIZE_STRING);
+
+        if (!empty($passwordNew) and ! empty($passwordConfirmNew)) {
+            if ($passwordNew === $passwordConfirmNew) {
+                $pass = new Model\User();
+                $email = Model\Session::getName();
+                $pass->updatePassword($email, $passwordNew);
+            } else {
+                array_push($this->errorsList, "Hasła nie są takie same");
+            }
+        } else {
+            array_push($this->errorsList, "Pola mają niepoprawny format");
+        }
+    }
+
+    public function resizeAvatar() {
+        $plik = $_FILES['image']['tmp_name'];
+        $dimentions = getimagesize($plik);
+        $imgSrc = imagecreatefromjpeg($plik);
+        $newW = 300;
+        $newH = ($newW * $dimentions[1]) / $dimentions[0];
+        $imgDst = imagecreatetruecolor($newW, $newH);
+        imagecopyresampled($imgDst, $imgSrc, 0, 0, 0, 0, $newW, $newH, $dimentions[0], $dimentions[1]);
+        header("Content-type: image/jpeg");
+        imagejpeg($imgDst, null, 10);
+    }
+
 }
