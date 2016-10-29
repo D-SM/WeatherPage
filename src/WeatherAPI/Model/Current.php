@@ -11,8 +11,8 @@ class Current extends AbstractModel {
     }
     
     private function createUrlByCoordinates($latitude, $longitude, $type) {
-        return $this->url . $type . '?lat={' . $latitude . '}&lon={' 
-                . $longitude . '}' . '&units=metric&appid=' . $this->apiId;
+        return $this->url . $type . '?lat=' . $latitude . '&lon=' 
+                . $longitude . '&units=metric&appid=' . $this->apiId;
     }
 
     private function getJson($url) {
