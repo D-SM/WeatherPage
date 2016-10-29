@@ -23,8 +23,8 @@ class ProfileController extends AbstractController{
         $cities = [];
         
         //@todo foreach po odczytanych miastach
-        $cities[] = $apiModel->getWeather('warsaw');
-        $cities[] = $apiModel->getWeather('berlin');
+        $cities[] = $apiModel->getWeatherByCityName('warsaw');
+        $cities[] = $apiModel->getWeatherByCityName('berlin');
 
         return $this->twig->render('profile-page.twig', [
             'cities' => $cities

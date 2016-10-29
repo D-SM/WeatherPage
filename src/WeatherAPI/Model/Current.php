@@ -6,8 +6,13 @@ class Current extends AbstractModel {
 
     private $data;
 
-    private function createUrl($city, $type) {
+    private function createUrlByCity($city, $type) {
         return $this->url . $type . '?q=' . $city . '&units=metric&appid=' . $this->apiId;
+    }
+    
+    private function createUrlByCoordinates($coordinates, $type) {
+        return $this->url . $type . '?lat={' . $coordinates[0] . '}&lon={' 
+                . $coordinates[1] . '}' . $city . '&units=metric&appid=' . $this->apiId;
     }
 
     private function getJson($url) {
@@ -16,16 +21,27 @@ class Current extends AbstractModel {
         );
     }
 
-    public function getWeather($city) {
-        $url = $this->createUrl($city, 'weather');
-        
-        //diabelek: getJeson zwraca coś returnem, ale nei jest to wykorzystywane nigdzie....
+    public function getWeatherByCityName($city) {
+        $url = $this->createUrlByCity($city, 'weather');
         $this->getJson($url);
+
+        return $this->getWeather($this->data);
+    }
+    
+    public function getWeatherByCoordinates($coordinates) {
+        $url = $this->createUrlByCoordinates($coordinates, 'weather');
+        $this->getJson($url);     
+        
+        return $this->getWeather($this->data);
+    }
+            
+    private function getWeather() {
         return [
             'name' => $this->data['name'],
             'temp' => $this->data['main']['temp'],
             'pressure' => $this->data['main']['pressure'],
             'humidity' => $this->data['main']['humidity'],
+            'icon' => $this->data['weather'][0]['icon'],
             'description' => $this->data['weather'][0]['description']
         ];
     }

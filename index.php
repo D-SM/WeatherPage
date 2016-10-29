@@ -85,7 +85,7 @@ $app->post('/register', function () use ($app) {
 
 $app->get('/', function() use ($app) {
     $controller = new MainController($app['twig']);
-    return $controller->renderPage();
+    return $controller->renderPage(1);
 });
 
 /* STRONA WYNIkU WYSZUKIWANIA */
@@ -113,7 +113,9 @@ $app->get('/apitest', function() use ($app) {
     $apiModel = new \WeatherAPI\Model\Current();
 //    echo '<pre>';
 //    var_dump($apiModel->getWeather('Poznan'));
-    return $app->json($apiModel->getWeather('Poznan'));
+//    return $app->json($apiModel->getWeather('Poznan'));
+    var_dump($apiModel->getWeatherByCityName('Poznan'));
+
 //    return var_dump($apiModel->getForecast('Poznan'));
 });
 
@@ -123,10 +125,15 @@ $app->get('test/', function() use ($app) {
 //    var_dump($apiModel->getWeather('Poznan'));
 //    var_dump($apiModel->getForecast('Poznan'));
   
-    $CurrentController = new \WeatherAPI\CurrentController('Poznan');
-    var_dump($CurrentController->getWeeklyAverages('Poznan'));
-    
+//    $CurrentController = new \WeatherAPI\CurrentController('Poznan');
+//    var_dump($CurrentController->getWeeklyAverages('Poznan'));
 //    return var_dump($apiModel->getForecast('Poznan'));
+});
+
+$app->get('/apigeo', function() use ($app) {
+    
+    
+    
 });
 
 $app->run();
