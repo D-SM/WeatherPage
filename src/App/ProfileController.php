@@ -28,11 +28,10 @@ class ProfileController extends AbstractController {
      
         if (isset($_POST['addingCity'])) {
                
-             $city = filter_input(INPUT_POST, 'duration', FILTER_SANITIZE_STRING);
-//            
-           
-            $addStatus = $citiesObj->addCity($id, $city);
-        }s
+            $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
+
+            $addStatus = $citiesObj->addCity($city);
+        }
         if (isset($_POST['removingCity'])) {
             $removeStatus = $citiesObj->deleteCity();
         }
