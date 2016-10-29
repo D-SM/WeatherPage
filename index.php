@@ -150,8 +150,11 @@ $app->get('/apigeo', function() use ($app) {
 
 $app->post('/apigeo', function() use ($app) {
     
-    return \WeatherAPI\GeolocController::getWeatherByCoordinates();
     
+    $location = \WeatherAPI\GeolocController::getWeatherByCoordinates();
+    return $app['twig']->render('geolocation.twig', [
+                    'location' => $location
+        ]);
 });
 
 $app->run();

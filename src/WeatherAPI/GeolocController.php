@@ -11,6 +11,6 @@ class GeolocController {
         $weather = new \WeatherAPI\Model\Current();
         $data = $weather->getWeatherByCoordinates($latitude, $longitude); 
         
-        return json_encode($data);
+        return $data;
     }
 }

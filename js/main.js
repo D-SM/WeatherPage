@@ -10,7 +10,7 @@
                 'data': { latitude: latitude.toString(), longitude: longitude.toString() },
 
                 'success': function(data) {  
-                    $('body').append(data);
+                    $('.main-container').prepend(data);
                     console.log('success');   
                     console.log(data);        
                 },
