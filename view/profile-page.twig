@@ -1,22 +1,28 @@
 {% extends "base.twig" %}
 {% block body %}
-<h1>PROFILE</h1>
+    <h1>PROFILE</h1>
+    
+    {% if alertAddCity %}
+        {% include 'alerts/city-added.twig' %}
+    {% endif %}
+    <div class="row">
+        {% for weather in cities %}
+            <div class="col-md-4 col-sm-6 cal-xs-12">
+                <div class="city-box">
+                    <ul>
+                        <li><h4>{{ weather['name'] }}</h4></li>
+                        <li>Temperature: {{ weather['temp'] }} *C</li>
+                        <li>Pressure: {{ weather['pressure'] }} hPa</li>
+                        <li>Humidity: {{ weather['humidity'] }} %</li>
+                        <li>Description: {{ weather['description'] }}</li>
+                        <img src="{{ webPath }}/images/{{weather['icon']}}.png" >
+                    </ul>
+                </div>
+            </div>
 
-{% for weather in cities %}
-    
-<div class="city-box">
-    <ul>
-        <li><h4>{{ weather['name'] }}</h4></li>
-        <li>Temperature: {{ weather['temp'] }} *C</li>
-        <li>Pressure: {{ weather['pressure'] }} hPa</li>
-        <li>Humility: {{ weather['humidity'] }} %</li>
-        <li>Description: {{ weather['description'] }}</li>
-        <img src="{{ webPath }}/images/{{weather['icon']}}.png" >
-    </ul>
-</div>
-    
-    
-{% endfor %}
+
+        {% endfor %}
+    </div>
 
 
 
