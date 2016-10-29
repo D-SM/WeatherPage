@@ -1,5 +1,10 @@
 {% extends "base.twig" %}
 {% block body %}
+    
+    {% if addingStatus %}
+        
+        
+    {% endif %}
     <h1>SEARCH PAGE</h1>
     
         <div class="city-box">
@@ -8,9 +13,10 @@
                 <li><h4>{{ city['name'] }}</h4></li>
                 <li>Temperature: {{ city['temp'] }} *C</li>
                 <li>Pressure: {{ city['pressure'] }} hPa</li>
-                <li>Humility: {{ city['humidity'] }} %</li>
+                <li>Humidity: {{ city['humidity'] }} %</li>
                 <li>Description: {{ city['description'] }}</li>
             </ul>
+            
         </div>
 
 {% endblock %}
