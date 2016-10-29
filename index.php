@@ -99,6 +99,10 @@ $app->get('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
     return $controller->renderPage();
 });
+$app->post('/profile', function() use ($app) {
+    $controller = new ProfileController($app['twig']);
+    return $controller->renderPage();
+});
 
 $app->post('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {
     return $app->redirect('user-panel');

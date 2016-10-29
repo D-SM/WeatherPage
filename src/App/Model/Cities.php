@@ -21,7 +21,7 @@ class Cities extends AbstractModel {
     public function addCity ($id, $city) {
         
         $result = $this->conn->query('SELECT count(*) as count FROM cities WHERE user_id = ' . $id
-                                . ' AND city_name = ' . $city);
+                                . ' AND city_name = "'. $city.'"');
         $count = $result->fetch_assoc();
         
        
