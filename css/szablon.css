@@ -32,6 +32,12 @@ h2.logo {
   .city-box li {
     list-style: none; }
 
+.login-reg a {
+  color: white;
+  float: left;
+  margin-left: 25px;
+  margin-top: 17px; }
+
 @media (max-width: 767px) {
   body {
     margin-top: 104px; } }

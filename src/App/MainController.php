@@ -18,7 +18,7 @@ class MainController extends AbstractController {
         // @todo odczytanie jakie miasta sa w profilu
 
         $cities = [];
-
+        $alert = true;
         //@todo foreach po odczytanych miastach
         
 //        foreach (city as $userCities) {
@@ -33,7 +33,7 @@ class MainController extends AbstractController {
 
             return $this->twig->render('main-page.twig', [
                         'cities' => $cities,
-                         'alert' => $alert,  
+                        'alert' => $alert
             ]);
         }
     
