@@ -28,9 +28,16 @@ h2.logo {
   width: 100%;
   box-shadow: 1px 1px 5px 0px #ddd; }
   .city-box ul {
-    padding: 5px 10px; }
+    padding: 5px 10px;
+    max-width: 240px;
+    display: inline-block; }
   .city-box li {
     list-style: none; }
+  .city-box img {
+    display: inline-block;
+    float: right;
+    vertical-align: top;
+    margin: 5px 10px 0px 0px; }
 
 .login-reg a {
   color: white;

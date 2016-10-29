@@ -5,7 +5,7 @@
        accesskey="" src="https://code.jquery.com/jquery-3.1.1.min.js"
        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
        crossorigin="anonymous"></script>
-    <script src='js/main.js'></script>
+    <script src='js/geoLocation.js'></script>
         
     <div class="row">
         {% for weather in cities %}
@@ -14,6 +14,23 @@
                     <ul>
                         <li><h4>{{ weather['name'] }}</h4></li>
                         <li>Temperature: {{ weather.temp }} *C</li>
+                        <li>Pressure: {{ weather['pressure'] }} hPa</li>
+                        <li>Humidity: {{ weather['humidity'] }} %</li>
+                        <li>Description: {{ weather['description'] }}</li>
+                    </ul>
+                    <img src="{{ webPath }}/images/{{weather['icon']}}.png" >
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <h1>FORECAST</h1>
+    <div class="row">
+        {% for weather in forecast %}
+            <div class="col-md-4 col-sm-6 cal-xs-12">
+                <div class="city-box ">
+                    <ul>
+                        <li><h4>{{ weather['date'] }}</h4></li>
+                        <li>Temperature: {{ weather['temp'] }} *C</li>
                         <li>Pressure: {{ weather['pressure'] }} hPa</li>
                         <li>Humidity: {{ weather['humidity'] }} %</li>
                         <li>Description: {{ weather['description'] }}</li>

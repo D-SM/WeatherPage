@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 {% block body %}
     <h1>PROFILE</h1>
-    
+
     {% if alertAddCity %}
         {% include 'alerts/city-added.twig' %}
     {% endif %}
@@ -15,8 +15,8 @@
                         <li>Pressure: {{ weather['pressure'] }} hPa</li>
                         <li>Humidity: {{ weather['humidity'] }} %</li>
                         <li>Description: {{ weather['description'] }}</li>
-                        <img src="{{ webPath }}/images/{{weather['icon']}}.png" >
                     </ul>
+                    <img src="{{ webPath }}/images/{{weather['icon']}}.png" >
                 </div>
             </div>
 

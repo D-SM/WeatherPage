@@ -10,9 +10,9 @@ h2.logo {
     color: white;
     margin-top: 10px;
     max-width: 200px;
-    
+
     & a {
-    color: white;
+        color: white;
     }
 }
 
@@ -36,12 +36,20 @@ h2.logo {
     background-color: white;
     width: 100%;
     box-shadow: 1px 1px 5px 0px #ddd;
-    
-      & ul {
+
+    & ul {
         padding: 5px 10px; 
+        max-width :240px;
+        display: inline-block;
     }
-        & li {
+    & li {
         list-style: none;
+    }
+    & img {
+        display: inline-block;
+        float: right;
+        vertical-align: top;
+        margin: 5px 10px 0px 0px;
     }
 }
 

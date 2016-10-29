@@ -18,8 +18,9 @@ class MainController extends AbstractController {
         // @todo odczytanie jakie miasta sa w profilu
 
         $cities = [];
+        $forecast = [];
         $alert = true;
-        $location = true;
+        $location = false;
         //@todo foreach po odczytanych miastach
         
 //        foreach (city as $userCities) {
@@ -31,11 +32,15 @@ class MainController extends AbstractController {
         $cities[] = $apiModel->getWeatherByCityName('rome');
         $cities[] = $apiModel->getWeatherByCityName('paris');
         $cities[] = $apiModel->getWeatherByCityName('moscow');
+        
+        $forecast = $apiModel->getForecast('warsaw');
 
             return $this->twig->render('main-page.twig', [
                         'cities' => $cities,
                         'alert' => $alert,
-                        'location' => $location
+                        'location' => $location,
+                        'forecast' => $forecast
+                    
             ]);
         }
     

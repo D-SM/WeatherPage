@@ -61,7 +61,11 @@ $app->get('/user-panel', function () use ($app ) {
         
         return $app['twig']->render('user-panel.twig', [
                     'email' => User\Model\Session::getName(),
+<<<<<<< HEAD
                    
+=======
+                    'id'  =>  User\Model\Session::getId()
+>>>>>>> 20e84ef7d83937f2f9cb4030162ef9572c020996
         ]);
     } else {
         return $app->redirect('/phpjspoz1/login');
@@ -175,11 +179,10 @@ $app->get('test/', function() use ($app) {
 
 $app->get('/apigeo', function() use ($app) {
     ?>
-    <script
+<!--    <script
        accesskey="" src="https://code.jquery.com/jquery-3.1.1.min.js"
        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
        crossorigin="anonymous"></script>
-    <script src='js/main.js'></script>
     <?php
     return '';
 });
