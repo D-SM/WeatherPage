@@ -5,11 +5,12 @@
  *
  * @author Scott
  */
+namespace App\Model;
 class Cities extends AbstractModel {
     
-    public function getCities($id) {
+    public function getCities() {
         $result = $this->conn->query('SELECT user_id, city_name '
-                . 'FROM weather WHERE user_id = ' . $id);
+                . 'FROM cities WHERE user_id = 1');
         return $result->fetch_all();
     }
     
