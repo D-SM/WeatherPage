@@ -16,9 +16,12 @@ class ProfileController extends AbstractController {
         
         $apiModel = new \WeatherAPI\Model\Current();
         $cities = [];
+        $citiesObj = new \Cities();
+        $cities =$citiesObj->addCity($id);
+        var_dump($cities);
 //@todo foreach po odczytanych miastach
-        $cities[] = $apiModel->getWeatherByCityName('warsaw');
-        $cities[] = $apiModel->getWeatherByCityName('berlin');
+//        $cities[] = $apiModel->getWeatherByCityName('warsaw');
+//        $cities[] = $apiModel->getWeatherByCityName('berlin');
         
         
         $alertObj = new Model\Cities();
