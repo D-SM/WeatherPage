@@ -1,14 +1,28 @@
 {% extends "base.twig" %}
 {% block body %}
     <h1>MAIN PAGE</h1>
-
-    <div div="row">
+   
+    <div class="row">
+            <div class="col-md-4 col-sm-6 cal-xs-12">
+                <div class="city-box">
+                    <ul>
+                        <li><h4>{{ ['name'] }}</h4></li>
+                        <li>Temperature: {{ ['temp'] }} *C</li>
+                        <li>Pressure: {{ ['pressure'] }} hPa</li>
+                        <li>Humidity: {{ humidity }} %</li>
+                        <li>Description: {{ ['description'] }}</li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+    
+    <div class="row">
         {% for weather in cities %}
             <div class="col-md-4 col-sm-6 cal-xs-12">
                 <div class="city-box ">
                     <ul>
                         <li><h4>{{ weather['name'] }}</h4></li>
-                        <li>Temperature: {{ weather['temp'] }} *C</li>
+                        <li>Temperature: {{ weather.temp }} *C</li>
                         <li>Pressure: {{ weather['pressure'] }} hPa</li>
                         <li>Humidity: {{ weather['humidity'] }} %</li>
                         <li>Description: {{ weather['description'] }}</li>
