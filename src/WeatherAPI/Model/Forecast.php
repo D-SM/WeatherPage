@@ -24,6 +24,7 @@ class Forecast extends AbstractModel {
 
         foreach ($this->data['list'] as $val) {
             $tmpArray = [
+                'dt' => $val['dt'],
                 'date' => date('d.m.Y H:i', $val['dt']),
                 'temp' => $val['main']['temp'],
                 'pressure' => $val['main']['pressure'],

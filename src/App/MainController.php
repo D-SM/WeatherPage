@@ -13,7 +13,7 @@ class MainController extends AbstractController {
 
     public function renderPage() {
         $apiCurrentWeather = new \WeatherAPI\Model\CurrentWeather();
-        $apiForecast = new \WeatherAPI\Model\Forecast();
+        $apiForecast = new \WeatherAPI\ForecastController();
         
 //        $citiesModel = new \Cities($id);
 //        $userCities[] = $citiesModel;
@@ -35,7 +35,7 @@ class MainController extends AbstractController {
         $cities[] = $apiCurrentWeather->getCurrentWeatherByCityName('paris');
         $cities[] = $apiCurrentWeather->getCurrentWeatherByCityName('moscow');
         
-        $forecast = $apiForecast->getForecastByCityName('warsaw');
+        $forecast = $apiForecast->getForecastbyCityForTomorrow('warsaw');
 
             return $this->twig->render('main-page.twig', [
                         'cities' => $cities,
