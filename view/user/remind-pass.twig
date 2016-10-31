@@ -1,14 +1,23 @@
 {% extends "base.twig" %}
 {% block body %}
-    <form method="post" action="" class="login-box">
-        <ul>
-            <li>
-                <label>Your E-mail</label>
-                <input type="email" name="email" value="{{ email }}" placeholder="E-mail" required/>
-            </li>   
-            <li>
-                <button class="btn btn-info">Remind me</button>
-            </li>
-        </ul>    
-    </form>
-{% endblock %}
+
+{% if errors is not empty %}
+   <ul class="errors">
+   {% for e in errors %}
+       <li>{{ e }}</li>
+   {% endfor %}
+   </ul>
+{% endif %}
+
+<form method="post" action="">
+    <ul>
+        <li>
+            <label>Podaj E-mail</label>
+            <input type="email" name="email" value="{{ email }}" placeholder="E-mail" required/>
+        </li>   
+        <li>
+            <button>Przpomnij</button>
+        </li>
+    </ul>    
+</form>
+{%endblock%}

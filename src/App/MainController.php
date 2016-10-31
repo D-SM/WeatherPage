@@ -36,13 +36,16 @@ class MainController extends AbstractController {
         $cities[] = $apiCurrentWeather->getCurrentWeatherByCityName('moscow');
         
         $forecast = $apiForecast->getForecastbyCityForTomorrow('warsaw');
+        
+        
+        $minMax = $apiForecast->getForecastByCityByDayMinMax('warsaw');
 
             return $this->twig->render('main-page.twig', [
                         'cities' => $cities,
                         'alert' => $alert,
                         'location' => $location,
-                        'forecast' => $forecast
-                    
+                        'forecast' => $forecast,
+                        'minmax' => $minMax                    
             ]);
         }
     

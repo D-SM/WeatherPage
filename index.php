@@ -71,7 +71,7 @@ $app->get('/user-panel', function () use ($app ) {
 $app->post('/user-panel', function () use ($app ) {
     if ($_POST['name']) {
 
-        $img = new User\helper\Image($inputImage);
+//        $img = new User\helper\Image($inputImage);
     } else {
         session_unset();
         return $app->redirect('/phpjspoz1/login');
@@ -117,7 +117,8 @@ $app->post('/login', function () use ($app ) {
 $app->post('/register', function () use ($app) {
     $reg = new User\UserController();
     $reg->renderRegisterPage();
-    return $app['twig']->render('user/register.twig', [
+    $reg->SendMail($reg->mailConfirm());
+    return $app['twig']->render('user/login.twig', [
                 'errors' => $reg->getInputErrors()
     ]);
 });
@@ -138,6 +139,15 @@ $app->get('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
     return $controller->renderPage($app);
 });
+
+$app->get('/confirm-account', function() use ($app) {
+    return $app['twig']->render('user/confirm-account.twig');
+});
+
+$app->get('/confirm-account', function() use ($app) {
+    return $app['twig']->render('user/login.twig');
+});
+
 $app->post('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
     return $controller->renderPage($app);
@@ -147,16 +157,28 @@ $app->post('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($
     $session = new User\Model\Session();
     User\Model\Session::saveName($email);
     $resetPass = new User\UserController();
-    $resetPass->resetPassword();
-    $cleanHash = new User\Model\User();
-    $cleanHash->removeHash($email);
-    return $app->redirect('/phpjspoz1/login');
+
+    if (!$resetPass->resetPassword()) {
+        return $app['twig']->render('user/reset-pass.twig', [
+                    'errors' => $resetPass->getInputErrors()
+        ]);
+    } else {
+        $cleanHash = new User\Model\User();
+        $cleanHash->removeHash($email);
+        return $app->redirect('/phpjspoz1/login');
+    }
 });
 $app->post('/remind-pass', function () use ($app) {
     $reg = new User\UserController();
-    $reg->renderRememberPasswordPage();
+    if($reg->SendMail($reg->renderRememberPasswordPage())){
     return $app['twig']->render('user/send-mail.twig');
-});
+    }else {
+        return $app['twig']->render('user/remind-pass.twig',[
+            'errors' => $reg->getInputErrors()
+        ]);
+    }
+
+    });
 
 $app->get('/apitest', function() use ($app) {
     $apiModel = new \WeatherAPI\Model\CurrentWeather();
