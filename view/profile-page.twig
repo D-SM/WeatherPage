@@ -5,6 +5,15 @@
     {% if alertAddCity %}
         {% include 'alerts/city-added.twig' %}
     {% endif %}
+    
+    {% if alertRemoveCity %}
+        {% include 'alerts/city-removed.twig' %}
+    {% endif %} 
+    
+    {% if alertCityExist %}
+        {% include 'alerts/city-exists.twig' %}
+    {% endif %}
+        
     <div class="row">
         {% for weather in cities %}
             <div class="col-md-4 col-sm-6 cal-xs-12">
@@ -17,11 +26,6 @@
                         <li>Description: {{ weather['description'] }}</li>
                     </ul>
                     <img src="{{ webPath }}/images/{{weather['icon']}}.png" >
-                    <form class="add-city" action="{{ webPath}}profile" method="post">
-                        <input name="city"  type="hidden" value="{{ cityToRemove }}">
-                        <input name="removingCity"  type="hidden" value="true">
-                        <button type="submit" class="btn btn-danger">Remove</button>
-                    </form>
                 </div>
             </div>
 

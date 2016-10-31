@@ -33,7 +33,7 @@ class Cities extends AbstractModel {
 
         $count = $result->fetch_assoc();       
        
-        if ($count['count'] !== 1) {
+        if ((int) $count['count'] === 0) {
             $this->conn->query('INSERT INTO cities VALUE (' . $this->id . ',"' . $city .'")');
             return true;
         }  
