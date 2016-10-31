@@ -19,9 +19,7 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
 
 $app['twig']->addGlobal('webPath', WEB_PATH);
 
-if (isset($_SESSION['name'])) {
 $app['twig']->addGlobal('userName', \User\Model\Session::getName());
-}
 
 /* WIDOK REJESTRACJI */
 //diabelek: kiepska nazwa rutingu = dlaczego nie register?

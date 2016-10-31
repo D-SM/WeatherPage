@@ -44,11 +44,6 @@ h2.logo {
     padding: 15px;
     max-width: 400px;
     max-height: 300px;
-    /*position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;*/
     
     & ul {
         padding: 0px;
@@ -56,6 +51,11 @@ h2.logo {
     
     & li {
         margin-bottom: 10px;
+    }
+    
+    & input {
+        display: block;
+        margin: auto;
     }
 }
 
@@ -80,6 +80,11 @@ h2.logo {
         vertical-align: top;
         margin: 5px 10px 0px 0px;
     }
+    & form {
+        & button.btn {
+        margin-left: 15px;
+        }   
+    } 
 }
 
 .login-reg a {

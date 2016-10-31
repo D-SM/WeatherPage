@@ -17,24 +17,30 @@ class ProfileController extends AbstractController {
             return $app->redirect('login');
         }
                 
-        $apiModel = new \WeatherAPI\Model\Current();
+        $apiModel = new \WeatherAPI\Model\CurrentWeather();
         $cities = [];
         $citiesObj = new Model\Cities(\User\Model\Session::getId());
 
         $userCities = $citiesObj->getCities();
 
         foreach ($userCities as $key) {
-            $cities[] = $apiModel->getWeatherByCityName($key[1]);
+            $cities[] = $apiModel->getCurrentWeatherByCityName($key[1]);
         }
 
         $removeStatus = false;
         $addStatus = false;
+        $existStatus = FALSE;
        
         $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
         
         if (!empty(filter_input(INPUT_POST, 'addingCity', FILTER_SANITIZE_STRING))) {
             $addStatus = $citiesObj->addCity($city);
+            
+            if (!$addStatus) {
+                $existStatus = true;
+            }
         }
+        
         if (!empty(filter_input(INPUT_POST, 'removingCity', FILTER_SANITIZE_STRING))) {
             $removeStatus = $citiesObj->deleteCity($city);
         }
@@ -42,7 +48,8 @@ class ProfileController extends AbstractController {
         return $this->twig->render('profile-page.twig', [
                     'cities' => $cities,
                     'alertAddCity' => $addStatus,
-                    'alertRemoveCity' => $removeStatus
+                    'alertRemoveCity' => $removeStatus,
+                    'alertCityExist' => $existStatus
         ]);
     }
 }

@@ -33,7 +33,9 @@ class Session {
     /* Pobranie emaila uzytownika z sesji */
 
     public static function getName() {
+        if (isset($_SESSION['email'])) {
         return $_SESSION['email'];
+        }
     }
 //    public static function saveImg($img) {
 //        $_SESSION['img'] = $img;
