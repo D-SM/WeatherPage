@@ -16,6 +16,8 @@
                         <li>Temperature: {{ weather.temp }} *C</li>
                         <li>Pressure: {{ weather['pressure'] }} hPa</li>
                         <li>Humidity: {{ weather['humidity'] }} %</li>
+                        <li>Wind speed: {{ weather['windSpeed'] }} m/s</li>
+                        <li>Wind Direction: {{ weather['windDirection'] }}</li>
                         <li>Description: {{ weather['description'] }}</li>
                     </ul>
                     <img src="{{ webPath }}/images/{{weather['icon']}}.png" >
