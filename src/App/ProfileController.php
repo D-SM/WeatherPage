@@ -17,7 +17,7 @@ class ProfileController extends AbstractController {
             return $app->redirect('login');
         }
                 
-        $apiModel = new \WeatherAPI\Model\Current();
+        $apiModel = new \WeatherAPI\Model\CurrentWeather();
         $cities = [];
         $citiesObj = new Model\Cities(\User\Model\Session::getId());
 
