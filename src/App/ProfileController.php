@@ -29,12 +29,18 @@ class ProfileController extends AbstractController {
 
         $removeStatus = false;
         $addStatus = false;
+        $existStatus = FALSE;
        
         $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
         
         if (!empty(filter_input(INPUT_POST, 'addingCity', FILTER_SANITIZE_STRING))) {
             $addStatus = $citiesObj->addCity($city);
+            
+            if (!$addStatus) {
+                $existStatus = true;
+            }
         }
+        
         if (!empty(filter_input(INPUT_POST, 'removingCity', FILTER_SANITIZE_STRING))) {
             $removeStatus = $citiesObj->deleteCity($city);
         }
@@ -42,7 +48,8 @@ class ProfileController extends AbstractController {
         return $this->twig->render('profile-page.twig', [
                     'cities' => $cities,
                     'alertAddCity' => $addStatus,
-                    'alertRemoveCity' => $removeStatus
+                    'alertRemoveCity' => $removeStatus,
+                    'alertCityExist' => $existStatus
         ]);
     }
 }
