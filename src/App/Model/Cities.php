@@ -9,8 +9,8 @@ namespace App\Model;
 class Cities extends AbstractModel {
     private $id;
     
-    public function __construct(){ 
-        $this->id = \User\Model\Session::getId();
+    public function __construct($id){ 
+        $this->id = $id;
     }
   
     public function getCities() {

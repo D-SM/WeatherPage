@@ -7,14 +7,19 @@
  */
 
 namespace App;
-
+use User\Model\Session;
 class ProfileController extends AbstractController {
 
-    public function renderPage() {
-
+    public function renderPage($app) {
+        
+        
+        if (empty(Session::getId())) {
+            return $app->redirect('login');
+        }
+                
         $apiModel = new \WeatherAPI\Model\Current();
         $cities = [];
-        $citiesObj = new Model\Cities();
+        $citiesObj = new Model\Cities(\User\Model\Session::getId());
 
         $userCities = $citiesObj->getCities();
 
