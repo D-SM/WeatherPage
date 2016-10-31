@@ -12,7 +12,9 @@ namespace App;
 class MainController extends AbstractController {
 
     public function renderPage() {
-        $apiModel = new \WeatherAPI\Model\Current();
+        $apiCurrentWeather = new \WeatherAPI\Model\CurrentWeather();
+        $apiForecast = new \WeatherAPI\Model\Forecast();
+        
 //        $citiesModel = new \Cities($id);
 //        $userCities[] = $citiesModel;
         // @todo odczytanie jakie miasta sa w profilu
@@ -26,14 +28,14 @@ class MainController extends AbstractController {
 //        foreach (city as $userCities) {
 //            var_dump($cities['']);
 //        };
-        $cities[] = $apiModel->getWeatherByCityName('warsaw');
-        $cities[] = $apiModel->getWeatherByCityName('berlin');
-        $cities[] = $apiModel->getWeatherByCityName('london');
-        $cities[] = $apiModel->getWeatherByCityName('rome');
-        $cities[] = $apiModel->getWeatherByCityName('paris');
-        $cities[] = $apiModel->getWeatherByCityName('moscow');
+        $cities[] = $apiCurrentWeather->getCurrentWeatherByCityName('warsaw');
+        $cities[] = $apiCurrentWeather->getCurrentWeatherByCityName('berlin');
+        $cities[] = $apiCurrentWeather->getCurrentWeatherByCityName('london');
+        $cities[] = $apiCurrentWeather->getCurrentWeatherByCityName('rome');
+        $cities[] = $apiCurrentWeather->getCurrentWeatherByCityName('paris');
+        $cities[] = $apiCurrentWeather->getCurrentWeatherByCityName('moscow');
         
-        $forecast = $apiModel->getForecast('warsaw');
+        $forecast = $apiForecast->getForecastByCityName('warsaw');
 
             return $this->twig->render('main-page.twig', [
                         'cities' => $cities,

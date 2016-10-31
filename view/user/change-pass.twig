@@ -1,19 +1,22 @@
-<form method="post" action="">
-    <ul>
-        <li>
-            <label>Stare Hasło</label>
-            <input type="password" name="password-old" placeholder="Hasło" required />
-        </li>  
-        <li>
-            <label>Hasło</label>
-            <input type="password" name="password-new" placeholder="Hasło" required />
-        </li>    
-        <li>
-            <label>Powtórz hasło</label>
-            <input type="password" name="password-confirm-new" placeholder="Powtórz hasło" required />
-        </li>
-        <li>
-            <button>Zapisz</button>
-        </li>
-    </ul>    
-</form>{# empty Twig template #}
+{% extends "base.twig" %}
+{% block body %}
+    <form method="post" action="" class="login-box">
+        <ul>
+            <li>
+                <label>Old password</label>
+                <input type="password" name="password-old" placeholder="Old password" required />
+            </li>  
+            <li>
+                <label>Password</label>
+                <input type="password" name="password-new" placeholder="New password" required />
+            </li>    
+            <li>
+                <label>Repeat password</label>
+                <input type="password" name="password-confirm-new" placeholder="Repeat password" required />
+            </li>
+            <li>
+                <button class="btn btn-info">Save</button>
+            </li>
+        </ul>    
+    </form>
+{% endblock %}

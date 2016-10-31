@@ -19,6 +19,10 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
 
 $app['twig']->addGlobal('webPath', WEB_PATH);
 
+if (isset($_SESSION['name'])) {
+$app['twig']->addGlobal('userName', \User\Model\Session::getName());
+}
+
 /* WIDOK REJESTRACJI */
 //diabelek: kiepska nazwa rutingu = dlaczego nie register?
 $app->get('/register', function () use ($app) {
@@ -157,19 +161,19 @@ $app->post('/remind-pass', function () use ($app) {
 });
 
 $app->get('/apitest', function() use ($app) {
-    $apiModel = new \WeatherAPI\Model\Current();
+    $apiModel = new \WeatherAPI\Model\CurrentWeather();
 //    echo '<pre>';
-//    var_dump($apiModel->getWeather('Poznan'));
-//    return $app->json($apiModel->getWeather('Poznan'));
-    var_dump($apiModel->getWeatherByCityName('Poznan'));
+//    var_dump($apiModel->getCurrentWeather('Poznan'));
+//    return $app->json($apiModel->getCurrentWeather('Poznan'));
+    var_dump($apiModel->getCurrentWeatherByCityName('Poznan'));
 
 //    return var_dump($apiModel->getForecast('Poznan'));
 });
 
 $app->get('test/', function() use ($app) {
-    $apiModel = new \WeatherAPI\Model\Current();
+    $apiModel = new \WeatherAPI\Model\CurrentWeather();
     echo '<pre>';
-//    var_dump($apiModel->getWeather('Poznan'));
+//    var_dump($apiModel->getCurrentWeather('Poznan'));
 //    var_dump($apiModel->getForecast('Poznan'));
 //    $CurrentController = new \WeatherAPI\CurrentController('Poznan');
 //    var_dump($CurrentController->getWeeklyAverages('Poznan'));
