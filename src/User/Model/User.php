@@ -54,9 +54,10 @@ class User extends AbstractModel {
     public function updateHash($email, $hash) {
 
         if ($this->validateUserLogin($email)) {
-            $this->conn->query('UPDATE user set u_reset =  "' . $hash . '" WHERE u_mail = "' . $email .'" ');
+            $this->conn->query('UPDATE user set u_reset =  "' . $hash . '", u_lifeExpectancyHash = NOW() WHERE u_mail = "' . $email .'" ');          
             return true;
         }
+        
         
         return false;
     }
@@ -73,5 +74,25 @@ class User extends AbstractModel {
 
         return $hash['u_reset'];
     }
+    
+    public function validateUserAccount ($email) {
+        
+        $result = $this->conn->query('SELECT (u_acountConfirm) FROM user WHERE u_mail = "'. $email .'" ');
 
+        $userConfirm = $result->fetch_assoc();
+
+        return $userConfirm['u_acountConfirm'];
+        
+    }
+    
+     public function getLifeHash ($email) {
+        
+        $result = $this->conn->query('SELECT (u_lifeExpectancyHash) FROM user WHERE u_mail = "'. $email .'" and u_lifeExpectancyHash > NOW() - 2000 ');
+        $startLifeHash = $result->fetch_assoc();
+
+        return $startLifeHash['u_lifeExpectancyHash'];
+        
+    }
+
+    
 }
