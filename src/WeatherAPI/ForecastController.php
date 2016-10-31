@@ -33,6 +33,40 @@ class ForecastController {
         return $newArr;
     }
 
+    // min max by day 
+    
+    public function getForecastByCityByDayMinMax($city) {
+        $forecastArr = $this->model->getForecastByCityName($city);
+        $newArr = [];
+        foreach ($forecastArr as $key => $day) {
+            $keyDate = explode(' ', $key)[0];
+            if (!array_key_exists($keyDate, $newArr)) {
+                $newArr[$keyDate] = [];
+                $newArr[$keyDate]['min'] = $day['temp'];
+                $newArr[$keyDate]['max'] = $day['temp'];
+            } else {
+                if ($day['temp'] < $newArr[$keyDate]['min']) {
+                    $newArr[$keyDate]['min'] = $day['temp'];
+                } else if ($day['temp'] > $newArr[$keyDate]['max']){
+                    $newArr[$keyDate]['max'] = $day['temp'];
+                }
+            }
+        }
+//        echo '<pre>';
+//        print_r($newArr);
+//        die();
+        return $newArr;
+        
+    }
+
+
+
+
+    public function getForecastByCity5Days($city) {
+        return $this->model->getForecastByCityName($city);
+    }
+
+
     public function getWeeklyAverages($city) {
 
         $avgTemperature = 0;

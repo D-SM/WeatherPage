@@ -12,11 +12,6 @@
                 <li>Humidity: {{ city['humidity'] }} %</li>
                 <li>Description: {{ city['description'] }}</li>
             </ul>
-            <form class="add-city" action="{{ webPath}}profile" method="post">
-                <input name="city"  type="hidden" value="{{ cityToAdd }}">
-                <input name="addingCity"  type="hidden" value="true">
-                <button type="submit" class="btn btn-success">Add to my profile</button>
-            </form>
         </div>
 
 {% endblock %}
