@@ -31,7 +31,7 @@ $app->get('/register', function () use ($app) {
 });
 
 /* WIDOK LOGOWANIA */
-//diabelek: kiepska nazwa rutingu = dlaczego nie login?
+
 $app->get('/login', function () use ($app) {
     //diabelek: brak controlera
     return $app['twig']->render('user/login.twig', [
@@ -138,11 +138,11 @@ $app->get('/search', function() use ($app) {
 /* STRONA PROFILU */
 $app->get('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
-    return $controller->renderPage();
+    return $controller->renderPage($app);
 });
 $app->post('/profile', function() use ($app) {
     $controller = new ProfileController($app['twig']);
-    return $controller->renderPage();
+    return $controller->renderPage($app);
 });
 
 $app->post('/reset-pass-confirm/{email}/{hash}', function ($email, $hash) use ($app) {
