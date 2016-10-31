@@ -31,8 +31,22 @@ class ForecastController {
             }
         }
         return $newArr;
-    }
+    }  
+    
+    public function getForecastByCityAndDay($city) {
+                
+        $dayNumber = filter_input(INPUT_POST, 'dayNumber', FILTER_SANITIZE_NUMBER_INT);        
 
+        $forecastArr = $this->model->getForecastByCityName($city);
+        $newArr = [];
+        foreach ($forecastArr as $day) {
+            if (date('d.m.Y', time() + (24 * 60 * 60) * $dayNumber) === date('d.m.Y', $day['dt'])) {
+                array_push($newArr, $day);
+            }
+        }
+        return $newArr;
+    }
+    
     public function getWeeklyAverages($city) {
 
         $avgTemperature = 0;
@@ -57,6 +71,5 @@ class ForecastController {
             'humidity' => $avgHumidity
         ];
     }    
-    
-    
+
 }

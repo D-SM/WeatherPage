@@ -199,4 +199,13 @@ $app->post('/apigeo', function() use ($app) {
     ]);
 });
 
+$app->post('/forecast', function() use ($app) {
+
+    $forecastcontroller = new \WeatherAPI\ForecastController(); 
+    $forecast = $forecastcontroller->getForecastByCityAndDay('Poznan');
+    return $app['twig']->render('//to_do_forecast_twig//.twig', [
+                'forecast' => $forecast
+    ]);
+});
+
 $app->run();
