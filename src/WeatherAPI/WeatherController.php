@@ -8,22 +8,20 @@
 
 namespace WeatherAPI;
 
-use WeatherAPI\Model\Current;
+use WeatherAPI\Model\CurrentWeather;
 
-class CurrentController implements InterfaceController
+class WeatherController implements InterfaceController
 
     {   
-        private $forecast;
         private $data;
         
-        public function __construct($city) {
-        $this->forecast = new \WeatherAPI\Model\Current($city);
-        $this->data = $this->forecast->getForecast($city);
-        }
+//        public function __construct($city) {
+//        }
 
         public function getData() {
             return '';
         }
+        
         
         public function getWeeklyAverages($city) {
     
