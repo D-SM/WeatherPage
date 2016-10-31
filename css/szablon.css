@@ -2,6 +2,9 @@ body {
   background-color: #eee;
   margin-top: 54px; }
 
+ul {
+  list-style: none; }
+
 h2.logo {
   color: white;
   margin-top: 10px;
@@ -20,6 +23,25 @@ h2.logo {
   padding: 0px;
   float: right;
   margin-top: 13px; }
+
+.login-box {
+  box-shadow: 1px 1px 5px 0px #ddd;
+  background-color: white;
+  text-align: center;
+  margin: auto;
+  margin-top: 60px;
+  padding: 15px;
+  max-width: 400px;
+  max-height: 300px;
+  /*position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;*/ }
+  .login-box ul {
+    padding: 0px; }
+  .login-box li {
+    margin-bottom: 10px; }
 
 .city-box {
   display: inline-block;
@@ -46,7 +68,7 @@ h2.logo {
   margin-top: 17px; }
 
 @media (max-width: 767px) {
-  body {
+  body, .login-box {
     margin-top: 104px; } }
 
 /*# sourceMappingURL=szablon.css.map */

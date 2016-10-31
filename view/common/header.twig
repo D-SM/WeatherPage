@@ -5,8 +5,13 @@
 
         </div>
         <div class="login-reg">
-            <a href="./login">LOG IN</a>
-            <a href="./register">REGISTER</a>
+            {% if userName == true %}
+                <a href="./profile">{{ userName }}</a>
+                <a href="./user-panel">User panel</a>                
+            {% else %}
+                <a href="./login">Log in</a>
+                <a href="./register">Register</a>
+            {% endif %}
         </div>
         <div class="search-form">                
             <form method="get" action="{{ webPath}}search">

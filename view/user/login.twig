@@ -1,29 +1,32 @@
-{% if errors is not empty %}
-   <ul class="errors">
-   {% for e in errors %}
-       <li>{{ e }}</li>
-   {% endfor %}
-   </ul>
-{% endif %}
+{% extends "base.twig" %}
+{% block body %}
+    {% if errors is not empty %}
+        <ul class="errors">
+            {% for e in errors %}
+                <li>{{ e }}</li>
+                {% endfor %}
+        </ul>
+    {% endif %}
 
-<form method="post" action="">
-    <ul>
-        <li>
-            <label>Login</label>
-            <input type="email" name="email" value="{{ email }}" placeholder="E-mail" required/>
-        </li>
-        <li>
-            <label>Hasło</label>
-            <input type="password" name="password" placeholder="Hasło" required />
-        </li>    
-        <li>
-            <button>Zaloguj</button>
-        </li>
-        <li>
-            <a href="{{webPath}}remind-pass">Przypomnij hasło</a>
-        </li>
-        <li>
-            <a href="{{webPath}}register">Rejestracja</a>
-        </li>
-    </ul>    
-</form>
+    <form method="post" action="" class="login-box">
+        <ul>
+            <li>
+                <label>Login</label>
+                <input type="email" name="email" value="{{ email }}" placeholder="E-mail" required/>
+            </li>
+            <li>
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password" required />
+            </li>    
+            <li>
+                <button class="btn btn-info">Log in</button>
+            </li>
+            <li>
+                <a href="{{webPath}}remind-pass">Password reminder</a>
+            </li>
+            <li>
+                <a href="{{webPath}}register">Sign up</a>
+            </li>
+        </ul>    
+    </form>
+{% endblock %}

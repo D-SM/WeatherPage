@@ -1,24 +1,26 @@
+{% extends "base.twig" %}
+{% block body %}
+    {% if errors is not empty %}
+        <ul class="errors">
+            {% for e in errors %}
+                <li>{{ e }}</li>
+                {% endfor %}
+        </ul>
+    {% endif %}
 
-{% if errors is not empty %}
-    <ul class="errors">
-    {% for e in errors %}
-        <li>{{ e }}</li>
-    {% endfor %}
-    </ul>
-{% endif %}
-
-<form method="post" action="">
-    <ul>
-        <li>
-            <label>Hasło</label>
-            <input type="password" name="password" placeholder="Hasło" required />
-        </li>    
-        <li>
-            <label>Powtórz hasło</label>
-            <input type="password" name="password-confirm" placeholder="Powtórz hasło" required />
-        </li>
-        <li>
-            <button>Zatwierdz</button>
-        </li>
-    </ul>    
-</form>
+    <form method="post" action="" class="login-box">
+        <ul>
+            <li>
+                <label>password</label>
+                <input type="password" name="password" placeholder="Password" required />
+            </li>    
+            <li>
+                <label>Repeat password</label>
+                <input type="password" name="password-confirm" placeholder="Repeat password" required />
+            </li>
+            <li>
+                <button class="btn btn-info">Confirm</button>
+            </li>
+        </ul>    
+    </form>
+{% endblock %}

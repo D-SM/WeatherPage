@@ -1,25 +1,30 @@
-<ul>
-    <li>
-        <label>user: {{ email }}</label>
-    </li>
-     <li> 
-         <form method="POST" action="">
-        <button>Wyloguj</button>
-         </form>
-    </li>
-    <li> 
-        <a href="change-pass">Zmien Hasło<a>
-    </li>
-    <li> 
-        <img src="">
-    </li>
-     <li> 
-        <img src ="avatar/{{id['u_id']}}_150.jpg">  
-    </li>
-      <li> 
-          <form method="POST" enctype="multipart/form-data">
-         <input type="file" name="img" >
-           <input type="submit">
-          </form>
-           </li>
-</ul>
+{% extends "base.twig" %}
+{% block body %}
+
+    <ul>
+        <li>
+            <label>user: {{ email }}</label>
+        </li>
+        <li> 
+            <form method="POST" action="">
+                <button class="btn btn-info">Log out</button>
+            </form>
+        </li>
+        <li> 
+            <a href="change-pass">Zmien Hasło</a>
+        </li>
+        <li> 
+            <img src="">
+        </li>
+        <li> 
+            <img src ="avatar/{{id['u_id']}}_150.jpg">  
+        </li>
+        <li> 
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="img" >
+                <input type="submit">
+            </form>
+        </li>
+    </ul>
+
+{% endblock %}

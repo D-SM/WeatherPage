@@ -19,6 +19,10 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
 
 $app['twig']->addGlobal('webPath', WEB_PATH);
 
+if (isset($_SESSION['name'])) {
+$app['twig']->addGlobal('userName', \User\Model\Session::getName());
+}
+
 /* WIDOK REJESTRACJI */
 //diabelek: kiepska nazwa rutingu = dlaczego nie register?
 $app->get('/register', function () use ($app) {
@@ -58,7 +62,7 @@ $app->get('/user-panel', function () use ($app ) {
         $test = $id->getID($email);
         
         
-        return $app['twig']->render('user-panel.twig', [
+        return $app['twig']->render('user/user-panel.twig', [
                     'email' => User\Model\Session::getName(),
                     'id' => User\Model\Session::getId()
         ]);

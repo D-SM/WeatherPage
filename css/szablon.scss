@@ -6,6 +6,10 @@ body {
     margin-top: 54px;
 }
 
+ul {
+    list-style: none;
+}
+
 h2.logo {
     color: white;
     margin-top: 10px;
@@ -30,6 +34,31 @@ h2.logo {
     float: right;
     margin-top: 13px;
 }
+
+.login-box {
+    box-shadow: 1px 1px 5px 0px #ddd;
+    background-color: white;
+    text-align: center;
+    margin: auto;
+    margin-top: 60px;
+    padding: 15px;
+    max-width: 400px;
+    max-height: 300px;
+    /*position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;*/
+    
+    & ul {
+        padding: 0px;
+    }
+    
+    & li {
+        margin-bottom: 10px;
+    }
+}
+
 .city-box {
     display: inline-block;
     margin: 10px 0px;
@@ -61,7 +90,7 @@ h2.logo {
 }
 
 @media (max-width: 767px) {
-    body {
+    body, .login-box {
         margin-top: 104px;
     }
 }

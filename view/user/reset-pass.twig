@@ -1,17 +1,18 @@
-
-<form method="post" action="">
-    <ul>
-        <li>
-            <label>Hasło</label>
-            <input type="password" name="password" placeholder="Hasło" required />
-        </li>    
-        <li>
-            <label>Powtórz hasło</label>
-            <input type="password" name="password-confirm" placeholder="Powtórz hasło" required />
-        </li>
-        <li>
-            <button>Zatwierdz</button>
-        </li>
-    </ul>    
-</form>
-{# empty Twig template #}
+{% extends "base.twig" %}
+{% block body %}
+    <form method="post" action="">
+        <ul>
+            <li>
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Hasło" required />
+            </li>    
+            <li>
+                <label>Repeat password</label>
+                <input type="password" name="password-confirm" placeholder="Powtórz hasło" required />
+            </li>
+            <li>
+                <button class="btn btn-info">Zatwierdz</button>
+            </li>
+        </ul>    
+    </form>
+{% endblock %}
