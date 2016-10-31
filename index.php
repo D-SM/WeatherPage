@@ -60,7 +60,7 @@ $app->get('/user-panel', function () use ($app ) {
         
         return $app['twig']->render('user-panel.twig', [
                     'email' => User\Model\Session::getName(),
-                    'id' => User\Model\Session::getId()
+                    'id'  =>  User\Model\Session::getId()
         ]);
     } else {
         return $app->redirect('/phpjspoz1/login');
