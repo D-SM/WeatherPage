@@ -23,6 +23,7 @@ class Cities extends AbstractModel {
     }
     
     public function deleteCity($city) {
+        $city = strtolower($city);
         $this->conn->query('DELETE FROM cities WHERE user_id = '. $this->id .' AND city_name = "'. $city .'"');
     }
     

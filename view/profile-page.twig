@@ -27,7 +27,7 @@
                     </ul>
                     <img src="{{ webPath }}/images/{{weather['icon']}}.png" >
                     <form class="add-city" action="{{ webPath}}profile" method="post">
-                        <input name="city"  type="hidden" value="{{ cityToRemove }}">
+                        <input name="city"  type="hidden" value="{{ weather['name'] }}">
                         <input name="removingCity"  type="hidden" value="true">
                         <button type="submit" class="btn btn-danger">Remove</button>
                     </form>
