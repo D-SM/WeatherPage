@@ -24,7 +24,7 @@ class ProfileController extends AbstractController {
         $userCities = $citiesObj->getCities();
 
         foreach ($userCities as $key) {
-            $cities[] = $apiModel->getWeatherByCityName($key[1]);
+            $cities[] = $apiModel->getCurrentWeatherByCityName($key[1]);
         }
 
         $removeStatus = false;

@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 namespace User\Model;
 
 class Session {
@@ -27,7 +33,9 @@ class Session {
     /* Pobranie emaila uzytownika z sesji */
 
     public static function getName() {
+        if (isset($_SESSION['email'])) {
         return $_SESSION['email'];
+        }
     }
 //    public static function saveImg($img) {
 //        $_SESSION['img'] = $img;
