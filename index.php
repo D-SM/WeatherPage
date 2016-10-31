@@ -58,7 +58,7 @@ $app->get('/user-panel', function () use ($app ) {
         $test = $id->getID($email);
         
         
-        return $app['twig']->render('user-panel.twig', [
+        return $app['twig']->render('user/user-panel.twig', [
                     'email' => User\Model\Session::getName(),
                     'id'  =>  User\Model\Session::getId()
         ]);
