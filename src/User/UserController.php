@@ -21,8 +21,10 @@ class UserController {
             $login = new Model\User();
             if ($login->validateUserPassword($email, $password)) {
 
-
+                $id = $login->getID($email);
+                Model\Session::saveID($id);
                 Model\Session::saveName($email);
+                
                 return true;
             } else {
                 array_push($this->errorsList, "Nieporawny login lub hasło");

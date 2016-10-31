@@ -9,10 +9,12 @@ namespace App\Model;
 class Cities extends AbstractModel {
     private $id;
     
-    public function __construct(){
-        $this->id = filter_var(session::getId(), FILTER_SANITIZE_NUMBER_INT);
+    public function __construct(){ 
+        $this->id = \User\Model\Session::getId();
     }
+  
     public function getCities() {
+       
         $result = $this->conn->query('SELECT user_id, city_name '
                 . 'FROM cities WHERE user_id = ' . $this->id );
         
