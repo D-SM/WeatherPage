@@ -17,7 +17,7 @@ class SearchController extends AbstractController {
 
     public function renderPage() {
         
-            $apiModel = new \WeatherAPI\Model\Current();
+            $apiModel = new \WeatherAPI\Model\CurrentWeather();
                 
             if (!isset($_GET['city'])) {
                 $cityToAdd = 'rome';
@@ -25,7 +25,7 @@ class SearchController extends AbstractController {
                 $cityToAdd = $_GET['city'];
             }
 
-            $city = $apiModel->getWeatherByCityName($cityToAdd);
+            $city = $apiModel->getCurrentWeatherByCityName($cityToAdd);
 
             return $this->twig->render('search-page.twig', [
             'city' => $city,

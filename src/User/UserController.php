@@ -22,7 +22,7 @@ class UserController {
             if ($login->validateUserPassword($email, $password)) {
 
                 $id = $login->getID($email);
-                Model\Session::saveID($id);
+                Model\Session::saveID($id['u_id']);
                 Model\Session::saveName($email);
                 
                 return true;

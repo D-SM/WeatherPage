@@ -10,6 +10,7 @@ class Cities extends AbstractModel {
     private $id;
     
     public function __construct($id){ 
+        parent::__construct();
         $this->id = $id;
     }
   
@@ -18,7 +19,7 @@ class Cities extends AbstractModel {
         $result = $this->conn->query('SELECT user_id, city_name '
                 . 'FROM cities WHERE user_id = ' . $this->id );
         
-        return $result->fetch_all();
+        return $result ? $result->fetch_all() : null;
     }
     
     public function deleteCity($city) {
