@@ -22,9 +22,9 @@ class UserController {
             if ($login->validateUserPassword($email, $password)) {
 
                 $id = $login->getID($email);
-                Model\Session::saveID($id);
+                Model\Session::saveID($id['u_id']);
                 Model\Session::saveName($email);
-                
+
                 return true;
             } else {
                 array_push($this->errorsList, "Nieporawny login lub hasło");
@@ -62,40 +62,44 @@ class UserController {
     public function renderRememberPasswordPage() {
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         if (!empty($email)) {
-
             $user = new Model\User();
             if ($user->validateUserLogin($email)) {
                 $randomHash = md5(rand(0, 100000) . 'sdthsfgvsuvwc5454v7hebt');
                 $user->updateHash($email, $randomHash);
+                return $url = WEB_PATH . 'reset-pass-confirm/' . $email . '/' . $randomHash;
+            } else {
+                array_push($this->errorsList, "Nie cwaniakuj !!!!");
+            }    
+        } else {
+            array_push($this->errorsList, "Mail nie istnieje");
+        }
+    }
+    public function mailConfirm() {
+        return $url = WEB_PATH .'/confirm-account';
+    }
+    public function SendMail($site) {
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $url = $site;
 
-
-
-                $url = WEB_PATH . 'reset-pass-confirm/' . $email . '/' . $randomHash;
-
-                $mail = new \PHPMailer();
+        $mail = new \PHPMailer();
 
 //        $mail->SMTPDebug = 3;  
 
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->SMTPAuth = true;
-                $mail->SMTPSecure = "tls";
-                $mail->Username = 'jsphppoz1mail@gmail.com';
-                $mail->Password = 'Test12345';
-                $mail->Port = 587;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = "tls";
+        $mail->Username = 'jsphppoz1mail@gmail.com';
+        $mail->Password = 'Test12345';
+        $mail->Port = 587;
 
-                $mail->addAddress($email);
-                $mail->isHTML(true);
+        $mail->addAddress($email);
+        $mail->isHTML(true);
 
-                $mail->Subject = 'Przypomnienie hasła';
-                $mail->Body = $url;
+        $mail->Subject = 'Przypomnienie hasła';
+        $mail->Body = $url;
 
-                $mail->send();
-
-                return true;
-            }
-        }
-        return false;
+        $mail->send();
     }
 
     public function logout() {
@@ -141,20 +145,35 @@ class UserController {
         }
     }
 
+    public function checkLifeHash() {
+        $email = Model\Session::getName();
+        $lifeHash = new Model\User();
+        $hash = $lifeHash->getLifeHash($email);
+
+        if ($hash !== null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function resetPassword() {
         $passwordNew = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         $passwordConfirmNew = filter_input(INPUT_POST, 'password-confirm', FILTER_SANITIZE_STRING);
 
-        if (!empty($passwordNew) and ! empty($passwordConfirmNew)) {
+        if (!empty($passwordNew) and ! empty($passwordConfirmNew) && $this->checkLifeHash() === true) {
             if ($passwordNew === $passwordConfirmNew) {
                 $pass = new Model\User();
                 $email = Model\Session::getName();
                 $pass->updatePassword($email, $passwordNew);
+                return true;
             } else {
                 array_push($this->errorsList, "Hasła nie są takie same");
+                return false;
             }
         } else {
             array_push($this->errorsList, "Pola mają niepoprawny format");
+            return false;
         }
     }
 

@@ -44,5 +44,20 @@
         {% endfor %}
     </div>
 
+    <h2>MIN MAX Temperatures</h2>
+    <div class="row">
+        {% for day, value in minmax %}
+            <div class="col-md-4 col-sm-6 cal-xs-12">
+                <div class="city-box ">
+                    <ul>
+                        <li><h4>{{ day }}</h4></li>
+                        <li>Min: {{ value['min'] }} *C</li>
+                        <li>Max: {{ value['max'] }} *C</li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
+    
 {% endblock %}
