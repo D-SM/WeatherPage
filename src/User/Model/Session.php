@@ -35,5 +35,10 @@ class Session {
     public static function getName() {
         return $_SESSION['email'];
     }
-
+//    public static function saveImg($img) {
+//        $_SESSION['img'] = $img;
+//    }
+//       public static function getImg() {
+//       return $_SESSION['img'] ;
+//    }
 }
