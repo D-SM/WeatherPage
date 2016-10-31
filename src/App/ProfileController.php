@@ -21,12 +21,6 @@ class ProfileController extends AbstractController {
         $cities = [];
         $citiesObj = new Model\Cities(\User\Model\Session::getId());
 
-        $userCities = $citiesObj->getCities();
-
-        foreach ($userCities as $key) {
-            $cities[] = $apiModel->getCurrentWeatherByCityName($key[1]);
-        }
-
         $removeStatus = false;
         $addStatus = false;
         $existStatus = FALSE;
@@ -45,6 +39,12 @@ class ProfileController extends AbstractController {
             $removeStatus = $citiesObj->deleteCity($city);
         }
 
+        $userCities = $citiesObj->getCities();
+
+        foreach ($userCities as $key) {
+            $cities[] = $apiModel->getCurrentWeatherByCityName($key[1]);
+        }
+        
         return $this->twig->render('profile-page.twig', [
                     'cities' => $cities,
                     'alertAddCity' => $addStatus,
